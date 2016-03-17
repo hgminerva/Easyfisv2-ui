@@ -11,27 +11,27 @@ System.register(['angular2/core'], function(exports_1, context_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1;
-    var AppComponent;
+    var Login;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            AppComponent = (function () {
-                function AppComponent() {
+            Login = (function () {
+                function Login() {
                 }
-                AppComponent = __decorate([
+                Login = __decorate([
                     core_1.Component({
-                        selector: 'my-app',
-                        template: '<h1>Accountico Angular 2 App</h1>'
+                        selector: 'app',
+                        templateUrl: 'app/login/login.html'
                     }), 
                     __metadata('design:paramtypes', [])
-                ], AppComponent);
-                return AppComponent;
+                ], Login);
+                return Login;
             }());
-            exports_1("AppComponent", AppComponent);
+            exports_1("Login", Login);
         }
     }
 });
-//# sourceMappingURL=app.component.js.map
+//# sourceMappingURL=login.js.map
