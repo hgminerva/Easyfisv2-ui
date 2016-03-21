@@ -1,8 +1,9 @@
 import {Component} from 'angular2/core';
 
 @Component({
-    selector: 'app',
+    selector: 'login',
     templateUrl: 'app/login/login.html'
 })
-
-export class Login { }
+export class LoginComponent {
+    title = 'Login';
+}

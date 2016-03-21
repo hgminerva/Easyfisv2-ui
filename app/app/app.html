@@ -1,0 +1,18 @@
+<section id="title" class="emerald">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>{{title}}</h3>
+            </div>
+            <div class="col-sm-6">
+                <ul class="breadcrumb pull-right">
+                    <li><a [routerLink]="['Home']">Home</a></li>
+                    <li><a [routerLink]="['Login']">Login</a></li>
+                    <li><a [routerLink]="['Dashboard']">Dashboard</a></li>                  
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<router-outlet></router-outlet>

@@ -1,24 +1,9 @@
-<section id="title" class="emerald">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
-                <h3>Login</h3>
-                <p>Please enter your username and password.</p>
-            </div>
-            <div class="col-sm-6">
-                <ul class="breadcrumb pull-right">
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="contact-page" class="container">
+<section id="login-page" class="container">
     <div class="row">
         <div class="col-sm-12">
-            <h4>  </h4>
+            <h4>Login</h4>
             <div class="status alert alert-success" style="display: none"></div>
-            <form id="main-login-form" method="post" action="#" role="form">
+            <form role="form" (submit)="login($event, username.value, password.value)">
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="form-group">

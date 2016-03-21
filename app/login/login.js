@@ -11,26 +11,27 @@ System.register(['angular2/core'], function(exports_1, context_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1;
-    var Login;
+    var LoginComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            Login = (function () {
-                function Login() {
+            LoginComponent = (function () {
+                function LoginComponent() {
+                    this.title = 'Login';
                 }
-                Login = __decorate([
+                LoginComponent = __decorate([
                     core_1.Component({
-                        selector: 'app',
+                        selector: 'login',
                         templateUrl: 'app/login/login.html'
                     }), 
                     __metadata('design:paramtypes', [])
-                ], Login);
-                return Login;
+                ], LoginComponent);
+                return LoginComponent;
             }());
-            exports_1("Login", Login);
+            exports_1("LoginComponent", LoginComponent);
         }
     }
 });
