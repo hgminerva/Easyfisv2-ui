@@ -20,6 +20,10 @@ System.register(['angular2/core'], function(exports_1, context_1) {
         execute: function() {
             HomeComponent = (function () {
                 function HomeComponent() {
+                    this.access_token = localStorage.getItem('access_token');
+                    this.expires_in = localStorage.getItem('expires_in');
+                    this.token_type = localStorage.getItem('token_type');
+                    this.userName = localStorage.getItem('userName');
                 }
                 HomeComponent = __decorate([
                     core_1.Component({
