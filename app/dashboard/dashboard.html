@@ -1,17 +1,162 @@
 <section id="software-page" class="container">
     <div class="row">
         <div class="col-sm-12">
-            <h4>Dashboard</h4>
-            <div class="status alert alert-success" style="display: none"></div>
-            <form role="form" (submit)="logout()">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-danger btn-lg">Logout</button>
-                        </div>
+            <h4></h4>
+            <br/>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-lg sharp btn-block">Supplier</button>
+                    </div>
+                </div>      
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-lg sharp btn-block">Customer</button>
+                    </div>
+                </div>     
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-lg sharp btn-block">Chart of Accounts</button>
+                    </div>
+                </div>                                
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-danger btn-lg sharp btn-block"  (click)="logout()">Logout</button>
                     </div>
                 </div>
-            </form>            
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg sharp btn-block">Purchase Order</button>
+                    </div>
+                </div>      
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-lg sharp btn-block">Company</button>
+                    </div>
+                </div>     
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg sharp btn-block">Journal Voucher</button>
+                    </div>
+                </div>                                
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg sharp btn-block">Settings</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg sharp btn-block">Receiving Receipt</button>
+                    </div>
+                </div>      
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg sharp btn-block">Sales Invoice</button>
+                    </div>
+                </div>     
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg sharp btn-block">Stock In</button>
+                    </div>
+                </div>                                
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg sharp btn-block">System Tables</button>
+                    </div>
+                </div>
+            </div>      
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info btn-lg sharp btn-block">Accounts Payable</button>
+                    </div>
+                </div>      
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info btn-lg sharp btn-block">Accounts Receivable</button>
+                    </div>
+                </div>     
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info btn-lg sharp btn-block">Inventory</button>
+                    </div>
+                </div>                                
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info btn-lg sharp btn-block">Financial Statement</button>
+                    </div>
+                </div>
+            </div>     
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg sharp btn-block">Disbursement</button>
+                    </div>
+                </div>      
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg sharp btn-block">Collection</button>
+                    </div>
+                </div>     
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg sharp btn-block">Stock Out</button>
+                    </div>
+                </div>                                
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg sharp btn-block">Stock Transfer</button>
+                    </div>
+                </div>
+            </div>        
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-lg sharp btn-block">Bank</button>
+                    </div>
+                </div>      
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg sharp btn-block">Bank Reconciliation</button>
+                    </div>
+                </div>     
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg sharp btn-block">Stock Count</button>
+                    </div>
+                </div>                                
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg sharp btn-block">User Management</button>
+                    </div>
+                </div>
+            </div>  
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info btn-lg sharp btn-block">Purchase Reports</button>
+                    </div>
+                </div>      
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info btn-lg sharp btn-block">Sales Reports</button>
+                    </div>
+                </div>     
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info btn-lg sharp btn-block">Other Reports</button>
+                    </div>
+                </div>                                
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-warning btn-lg sharp btn-block">Utilities</button>
+                    </div>
+                </div>
+            </div>                                                                              
         </div>
     </div>
 </section>
