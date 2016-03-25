@@ -37,6 +37,9 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                     localStorage.removeItem('userName');
                     this._router.navigate(['Login']);
                 };
+                DashboardComponent.prototype.chartOfAccounts = function () {
+                    this._router.navigate(['ChartOfAccounts']);
+                };
                 DashboardComponent = __decorate([
                     core_1.Component({
                         selector: 'dashboard',

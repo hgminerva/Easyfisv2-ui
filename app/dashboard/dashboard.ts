@@ -21,4 +21,7 @@ export class DashboardComponent implements OnInit {
         
         this._router.navigate(['Login']);
     }     
+    chartOfAccounts() {
+        this._router.navigate(['ChartOfAccounts']);
+    }
 }

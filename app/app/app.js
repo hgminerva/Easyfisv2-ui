@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../home/home', '../login/login', '../dashboard/dashboard'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', '../home/home', '../login/login', '../dashboard/dashboard', '../chartOfAccounts/chartOfAccounts'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', '../home/home', '../login/l
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, home_1, login_1, dashboard_1;
+    var core_1, router_1, home_1, login_1, dashboard_1, chartOfAccounts_1;
     var App;
     return {
         setters:[
@@ -28,6 +28,9 @@ System.register(['angular2/core', 'angular2/router', '../home/home', '../login/l
             },
             function (dashboard_1_1) {
                 dashboard_1 = dashboard_1_1;
+            },
+            function (chartOfAccounts_1_1) {
+                chartOfAccounts_1 = chartOfAccounts_1_1;
             }],
         execute: function() {
             App = (function () {
@@ -59,6 +62,11 @@ System.register(['angular2/core', 'angular2/router', '../home/home', '../login/l
                             path: '/dashboard',
                             name: 'Dashboard',
                             component: dashboard_1.DashboardComponent
+                        },
+                        {
+                            path: '/chartOfAccounts',
+                            name: 'ChartOfAccounts',
+                            component: chartOfAccounts_1.ChartOfAccountsComponent
                         }
                     ]), 
                     __metadata('design:paramtypes', [])

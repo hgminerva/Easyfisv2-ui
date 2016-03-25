@@ -5,6 +5,7 @@ import { Http } from 'angular2/http';
 import { HomeComponent } from '../home/home';
 import { LoginComponent } from '../login/login';
 import { DashboardComponent } from '../dashboard/dashboard';
+import { ChartOfAccountsComponent } from '../chartOfAccounts/chartOfAccounts';
 
 @Component({
   selector: 'app',
@@ -30,7 +31,12 @@ import { DashboardComponent } from '../dashboard/dashboard';
     path: '/dashboard',
     name: 'Dashboard',
     component: DashboardComponent
-  }
+  },
+  {
+    path: '/chartOfAccounts',
+    name: 'ChartOfAccounts',
+    component: ChartOfAccountsComponent
+  }  
 ])
 export class App {
     title = 'App';
