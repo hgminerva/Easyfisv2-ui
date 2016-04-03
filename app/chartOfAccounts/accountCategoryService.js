@@ -36,8 +36,6 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                             if (response.json().hasOwnProperty(key)) {
                                 data.push({
                                     id: response.json()[key].Id,
-                                    editId: '<button type="submit" class="btn-xs btn-default sharp" onClick="openModalAccountCategory(' + response.json()[key].Id + ')">Edit</button>',
-                                    deleteId: '<button type="submit" class="btn-xs btn-default sharp" (click)="delAccountCategory()">Del</button>',
                                     accountCategoryCode: response.json()[key].AccountCategoryCode,
                                     accountCategory: response.json()[key].AccountCategoryDescription
                                 });
