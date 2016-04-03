@@ -1,8 +1,84 @@
 <section id="home-page" class="container">
-    <div class="row">
-        <div class="col-sm-12">
-            <h4>Chart Of Accounts</h4>    
-            <wj-flex-grid [itemsSource]="data"></wj-flex-grid>
+    
+    <br/>
+    
+    <ul class="nav nav-tabs">
+        <li [class.active]="tabIndex == 0" (click)="selectTab(0)"><a data-toggle="tab" href="#account">Account</a></li>
+        <li [class.active]="tabIndex == 1" (click)="selectTab(1)"><a data-toggle="tab" href="#accountType">Account Type</a></li>
+        <li [class.active]="tabIndex == 2" (click)="selectTab(2)"><a data-toggle="tab" href="#accountCategory">Account Category</a></li>
+        <li [class.active]="tabIndex == 3" (click)="selectTab(3)"><a data-toggle="tab" href="#accountCashFlow">Account Cash Flow</a></li>
+    </ul>
+    
+    <div class="tab-content">
+        
+        <!-- Chart of Accounts Tab -->
+        <div id="account" class="tab-pane fade" [ngClass]="{active: tab[0]}"> </div>
+        
+        <!-- Chart of Accounts Type Tab -->
+        <div id="accountType" class="tab-pane fade" [ngClass]="{active: tab[1]}"></div>
+        
+        <!-- Chart of Accounts Category Tab -->
+        <div id="accountCategory" class="tab-pane fade" [ngClass]="{active: tab[2]}">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4></h4>    
+                    <wj-flex-grid #flexAccountCategory 
+                                class="grid" 
+                                [itemsSource]="dataAccountCategory">  
+                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                <button class="btn btn-primary sharp" (click)="openAccountCategoryModal(false)">
+                                        Edit
+                                </button>
+                            </template>
+                        </wj-flex-grid-column>                 
+                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                <button class="btn btn-danger sharp" (click)="delAccountCategory()">
+                                        Del
+                                </button>
+                            </template>
+                        </wj-flex-grid-column>    
+                        <wj-flex-grid-column [header]="'Code'" [binding]="'accountCategoryCode'" [isReadOnly]="true" [width]="100">  
+                        </wj-flex-grid-column>       
+                        <wj-flex-grid-column [header]="'Account Category'" [binding]="'accountCategory'" [isReadOnly]="true" [width]="'*'">  
+                        </wj-flex-grid-column>                            
+                    </wj-flex-grid>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-sm-6 btn-group">
+                    <button type="submit" class="btn btn-primary pull-left sharp" id="btnAddAccountCategory" (click)="openAccountCategoryModal(true)">Add</button>
+                </div>       
+                
+                <div class="col-sm-6 btn-group" id="navAccountCategory">
+                    <button type="button" class="btn btn-default pull-right sharp" id="btnFirstAccountCategory" (click)="dataAccountCategory.moveToFirstPage()">
+                        <span class="glyphicon glyphicon-fast-backward"></span>
+                    </button>
+                    <button type="button" class="btn btn-default pull-right sharp" id="btnPreviousAccountCategory" (click)="dataAccountCategory.moveToPreviousPage()">
+                        <span class="glyphicon glyphicon-step-backward"></span>
+                    </button>
+                    <button type="button" class="btn btn-default pull-right sharp" disabled style="width:100px" id="btnCurrentAccountCategory">
+                        {{dataAccountCategory.pageIndex + 1}} / {{dataAccountCategory.pageCount}}
+                    </button>
+                    <button type="button" class="btn btn-default pull-right sharp" id="btnNextAccountCategory" (click)="dataAccountCategory.moveToNextPage()">
+                        <span class="glyphicon glyphicon-step-forward"></span>
+                    </button>
+                    <button type="button" class="btn btn-default pull-right sharp" id="btnLastAccountCategory" (click)="dataAccountCategory.moveToLastPage()">
+                        <span class="glyphicon glyphicon-fast-forward"></span>
+                    </button>
+                </div>
+            </div>             
         </div>
+        
+        <!-- Chart of Accounts Cash Flow Tab -->
+        <div id="accountCashFlow" class="tab-pane fade" [ngClass]="{active: tab[3]}">
+            
+        </div>
+        
     </div>
+          
+   
+    
 </section>

@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid', '../chartOfAccounts/accountCategoryService'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/common', 'angular2/router', 'wijmo/wijmo.angular2.grid', '../chartOfAccounts/accountCategoryService'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -13,12 +13,15 @@ System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid'
     var __param = (this && this.__param) || function (paramIndex, decorator) {
         return function (target, key) { decorator(target, key, paramIndex); }
     };
-    var core_1, router_1, wjNg2FlexGrid, accountCategoryService_1;
+    var core_1, common_1, router_1, wjNg2FlexGrid, accountCategoryService_1;
     var ChartOfAccountsComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (common_1_1) {
+                common_1 = common_1_1;
             },
             function (router_1_1) {
                 router_1 = router_1_1;
@@ -32,6 +35,7 @@ System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid'
         execute: function() {
             ChartOfAccountsComponent = (function () {
                 function ChartOfAccountsComponent(_router, _accountCategoryService) {
+                    this.tab = [false, false, false, false];
                     this.router = _router;
                     this.accountCategoryService = _accountCategoryService;
                 }
@@ -40,14 +44,37 @@ System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid'
                         this.router.navigate(['Login']);
                     }
                     else {
-                        this.data = new wijmo.collections.CollectionView(this.accountCategoryService.getAccountCategories());
+                        this.selectTab(2);
+                        this.dataAccountCategory = new wijmo.collections.CollectionView(this.accountCategoryService.getAccountCategories());
+                        this.dataAccountCategory.pageSize = 15;
+                        this.dataAccountCategory.trackChanges = true;
                     }
+                };
+                ChartOfAccountsComponent.prototype.selectTab = function (n) {
+                    for (var i = 0; i < this.tab.length; i++) {
+                        this.tab[n] = false;
+                    }
+                    this.tab[n] = true;
+                };
+                ChartOfAccountsComponent.prototype.openAccountCategoryModal = function (add) {
+                    if (add == true) {
+                        alert("Add");
+                    }
+                    else {
+                        alert("Edit: " + this.dataAccountCategory.currentItem.id);
+                    }
+                };
+                ChartOfAccountsComponent.prototype.delAccountCategory = function () {
+                    alert("Delete: " + this.dataAccountCategory.currentItem.id);
                 };
                 ChartOfAccountsComponent = __decorate([
                     core_1.Component({
                         selector: 'chartOfAccounts',
                         templateUrl: 'app/chartOfAccounts/chartOfAccounts.html',
-                        directives: [wjNg2FlexGrid.WjFlexGrid, wjNg2FlexGrid.WjFlexGridColumn],
+                        directives: [wjNg2FlexGrid.WjFlexGrid,
+                            wjNg2FlexGrid.WjFlexGridColumn,
+                            wjNg2FlexGrid.WjFlexGridCellTemplate,
+                            common_1.NgClass],
                         providers: [accountCategoryService_1.AccountCategoryService]
                     }),
                     __param(1, core_1.Inject(accountCategoryService_1.AccountCategoryService)), 
