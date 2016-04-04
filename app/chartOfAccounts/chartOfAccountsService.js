@@ -11,7 +11,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, http_1;
-    var AccountCategoryService;
+    var ChartOfAccountsService;
     return {
         setters:[
             function (core_1_1) {
@@ -21,13 +21,13 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                 http_1 = http_1_1;
             }],
         execute: function() {
-            AccountCategoryService = (function () {
-                function AccountCategoryService(_http) {
+            ChartOfAccountsService = (function () {
+                function ChartOfAccountsService(_http) {
                     this.http = _http;
                 }
-                AccountCategoryService.prototype.getAccountCategories = function () {
+                ChartOfAccountsService.prototype.getAccounts = function () {
                     var data = new wijmo.collections.ObservableArray();
-                    var url = "http://api.accountico.io/api/AccountCategory";
+                    var url = "http://api.accountico.io/api/MstAccount";
                     var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
                     var options = new http_1.RequestOptions({ headers: headers });
                     this.http.get(url, options)
@@ -36,8 +36,8 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                             if (response.json().hasOwnProperty(key)) {
                                 data.push({
                                     id: response.json()[key].Id,
-                                    accountCategoryCode: response.json()[key].AccountCategoryCode,
-                                    accountCategory: response.json()[key].AccountCategoryDescription
+                                    accountCode: response.json()[key].AccountCode,
+                                    account: response.json()[key].Account
                                 });
                             }
                         }
@@ -47,14 +47,36 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     });
                     return data;
                 };
-                AccountCategoryService = __decorate([
+                ChartOfAccountsService.prototype.getAccountCategories = function () {
+                    var data = new wijmo.collections.ObservableArray();
+                    var url = "http://api.accountico.io/api/MstAccountCategory";
+                    var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
+                    var options = new http_1.RequestOptions({ headers: headers });
+                    this.http.get(url, options)
+                        .subscribe(function (response) {
+                        for (var key in response.json()) {
+                            if (response.json().hasOwnProperty(key)) {
+                                data.push({
+                                    id: response.json()[key].Id,
+                                    accountCategoryCode: response.json()[key].AccountCategoryCode,
+                                    accountCategory: response.json()[key].AccountCategory
+                                });
+                            }
+                        }
+                    }, function (error) {
+                        alert(error.text());
+                        console.log(error.text());
+                    });
+                    return data;
+                };
+                ChartOfAccountsService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])
-                ], AccountCategoryService);
-                return AccountCategoryService;
+                ], ChartOfAccountsService);
+                return ChartOfAccountsService;
             }());
-            exports_1("AccountCategoryService", AccountCategoryService);
+            exports_1("ChartOfAccountsService", ChartOfAccountsService);
         }
     }
 });
-//# sourceMappingURL=accountCategoryService.js.map
+//# sourceMappingURL=ChartOfAccountsService.js.map

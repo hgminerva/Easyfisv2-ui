@@ -1,51 +1,66 @@
-import {Component, OnInit, Inject, ViewChild} from 'angular2/core';
-import {NgClass} from 'angular2/common';
+import {Component, OnInit, Inject} from 'angular2/core';
 import {Router} from 'angular2/router';
-
 import * as wjNg2FlexGrid from 'wijmo/wijmo.angular2.grid';
 
-import {AccountCategoryService} from '../chartOfAccounts/accountCategoryService';
+import {ChartOfAccountsTabs} from '../chartOfAccounts/chartOfAccountsTabs';
+import {ChartOfAccountsTab} from '../chartOfAccounts/chartOfAccountsTab';
+import {ChartOfAccountsService} from '../chartOfAccounts/ChartOfAccountsService';
 
 @Component({
-    selector: 'chartOfAccounts',
-    templateUrl: 'app/chartOfAccounts/chartOfAccounts.html',
-    directives: [wjNg2FlexGrid.WjFlexGrid, 
-                 wjNg2FlexGrid.WjFlexGridColumn, 
-                 wjNg2FlexGrid.WjFlexGridCellTemplate,
-                 NgClass],
-    providers: [AccountCategoryService]
+  selector: 'chartOfAccounts',
+  templateUrl: 'app/chartOfAccounts/chartOfAccounts.html',
+  directives: [ wjNg2FlexGrid.WjFlexGrid, 
+                wjNg2FlexGrid.WjFlexGridColumn, 
+                wjNg2FlexGrid.WjFlexGridCellTemplate,
+                ChartOfAccountsTabs, 
+                ChartOfAccountsTab ],
+   providers: [ChartOfAccountsService]
 })
 export class ChartOfAccountsComponent implements OnInit {
-    protected accountCategoryService: AccountCategoryService; 
+    protected chartOfAccountsService: ChartOfAccountsService; 
+    
     private dataAccountCategory : wijmo.collections.CollectionView;
+    private dataAccount : wijmo.collections.CollectionView;
+    
     private router : Router;
-    private tabIndex : number;
-    private tab : boolean[] = [false,false,false,false];
-
+    
     constructor (_router: Router, 
-                 @Inject(AccountCategoryService) _accountCategoryService: AccountCategoryService) {
+                 @Inject(ChartOfAccountsService) _chartOfAccountsService: ChartOfAccountsService) {
         this.router = _router;
-        this.accountCategoryService = _accountCategoryService;
-    }    
+        this.chartOfAccountsService = _chartOfAccountsService;
+    }     
     
     ngOnInit() {
         if (!localStorage.getItem('access_token')) {
             this.router.navigate(['Login']);
         } else {
-            this.selectTab(2);
-            this.dataAccountCategory = new wijmo.collections.CollectionView(this.accountCategoryService.getAccountCategories());
-            this.dataAccountCategory.pageSize = 15; 
-            this.dataAccountCategory.trackChanges = true;                
+            this.dataAccount = new wijmo.collections.CollectionView(this.chartOfAccountsService.getAccounts());
+            this.dataAccount.pageSize = 10; 
+            this.dataAccount.trackChanges = true;  
+                        
+            this.dataAccountCategory = new wijmo.collections.CollectionView(this.chartOfAccountsService.getAccountCategories());
+            this.dataAccountCategory.pageSize = 10; 
+            this.dataAccountCategory.trackChanges = true;              
+        }
+    } 
+    
+    refresh() {
+        this.dataAccount.refresh();
+        this.dataAccountCategory.refresh();
+    }
+    
+    openAccountModal(add) {
+        if(add==true) {
+            alert("Add");
+        } else {
+            alert("Edit: " + this.dataAccount.currentItem.id);
         }
     }
     
-    selectTab(n) {
-        for (var i = 0; i < this.tab.length; i++) {
-            this.tab[n] = false;
-        }        
-        this.tab[n] = true;
-    }
-    
+    delAccount() {
+        alert("Delete: " + this.dataAccount.currentItem.id);
+    }  
+        
     openAccountCategoryModal(add) {
         if(add==true) {
             alert("Add");
@@ -56,6 +71,5 @@ export class ChartOfAccountsComponent implements OnInit {
     
     delAccountCategory() {
         alert("Delete: " + this.dataAccountCategory.currentItem.id);
-    }
-    
+    }    
 }
