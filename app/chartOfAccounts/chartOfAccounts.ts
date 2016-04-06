@@ -20,6 +20,8 @@ export class ChartOfAccountsComponent implements OnInit {
     protected chartOfAccountsService: ChartOfAccountsService; 
     
     private dataAccountCategory : wijmo.collections.CollectionView;
+    private dataAccountCashFlow : wijmo.collections.CollectionView;
+    private dataAccountType : wijmo.collections.CollectionView;
     private dataAccount : wijmo.collections.CollectionView;
     
     private router : Router;
@@ -38,28 +40,51 @@ export class ChartOfAccountsComponent implements OnInit {
             this.dataAccount.pageSize = 10; 
             this.dataAccount.trackChanges = true;  
                         
+            this.dataAccountType = new wijmo.collections.CollectionView(this.chartOfAccountsService.getAccountTypes());
+            this.dataAccountType.pageSize = 10; 
+            this.dataAccountType.trackChanges = true;    
+                                    
             this.dataAccountCategory = new wijmo.collections.CollectionView(this.chartOfAccountsService.getAccountCategories());
             this.dataAccountCategory.pageSize = 10; 
-            this.dataAccountCategory.trackChanges = true;              
+            this.dataAccountCategory.trackChanges = true;     
+            
+            this.dataAccountCashFlow = new wijmo.collections.CollectionView(this.chartOfAccountsService.getAccountCashFlow());
+            this.dataAccountCashFlow.pageSize = 10; 
+            this.dataAccountCashFlow.trackChanges = true;                       
         }
     } 
     
     refresh() {
         this.dataAccount.refresh();
+        this.dataAccountType.refresh();
         this.dataAccountCategory.refresh();
+        this.dataAccountCashFlow.refresh();
     }
     
     openAccountModal(add) {
+        document.getElementById("openAccountModal").click();
         if(add==true) {
-            alert("Add");
+            //alert("Add");
         } else {
-            alert("Edit: " + this.dataAccount.currentItem.id);
+            //alert("Edit: " + this.dataAccount.currentItem.id);
         }
     }
     
     delAccount() {
         alert("Delete: " + this.dataAccount.currentItem.id);
     }  
+    
+    openAccountTypeModal(add) {
+        if(add==true) {
+            alert("Add");
+        } else {
+            alert("Edit: " + this.dataAccountType.currentItem.id);
+        }
+    }
+    
+    delAccountType() {
+        alert("Delete: " + this.dataAccountType.currentItem.id);
+    }      
         
     openAccountCategoryModal(add) {
         if(add==true) {
@@ -71,5 +96,17 @@ export class ChartOfAccountsComponent implements OnInit {
     
     delAccountCategory() {
         alert("Delete: " + this.dataAccountCategory.currentItem.id);
+    }    
+        
+    openAccountCashFlowModal(add) {
+        if(add==true) {
+            alert("Add");
+        } else {
+            alert("Edit: " + this.dataAccountCashFlow.currentItem.id);
+        }
+    }
+    
+    delAccountCashFlow() {
+        alert("Delete: " + this.dataAccountCashFlow.currentItem.id);
     }    
 }

@@ -33,7 +33,13 @@
                             
                         <wj-flex-grid-column [header]="'Account'" [binding]="'account'" [isReadOnly]="true" [width]="'*'">  
                         </wj-flex-grid-column>     
-                                                
+                        
+                        <wj-flex-grid-column [header]="'Type'" [binding]="'accountType'" [isReadOnly]="true" [width]="'*'">  
+                        </wj-flex-grid-column>       
+                        
+                        <wj-flex-grid-column [header]="'Cash Flow'" [binding]="'accountCashFlow'" [isReadOnly]="true" [width]="'*'">  
+                        </wj-flex-grid-column>  
+                                                                                            
                     </wj-flex-grid>                      
                 </div>
             </div> 
@@ -66,9 +72,64 @@
         <tab tabTitle="Account Type">
             <div class="row">
                 <div class="col-sm-12">
-                    <h4>Chart of Accounts - Account Type</h4>    
+                    <h4></h4>   
+                    <wj-flex-grid #flexAccountType
+                                  class="grid" 
+                                  [itemsSource]="dataAccountType">  
+                        
+                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                <button class="btn btn-primary sharp" (click)="openAccountTypeModal(false)">
+                                        Edit
+                                </button>
+                            </template>
+                        </wj-flex-grid-column>     
+                                    
+                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                <button class="btn btn-danger sharp" (click)="delAccountType()">
+                                        Del
+                                </button>
+                            </template>
+                        </wj-flex-grid-column>    
+                        
+                        <wj-flex-grid-column [header]="'Code'" [binding]="'accountTypeCode'" [isReadOnly]="true" [width]="100">  
+                        </wj-flex-grid-column>     
+                            
+                        <wj-flex-grid-column [header]="'Account Type'" [binding]="'accountType'" [isReadOnly]="true" [width]="'*'">  
+                        </wj-flex-grid-column>     
+                        
+                        <wj-flex-grid-column [header]="'Sub Category'" [binding]="'subCategoryDescription'" [isReadOnly]="true" [width]="'*'">  
+                        </wj-flex-grid-column> 
+                                                
+                        <wj-flex-grid-column [header]="'Category'" [binding]="'accountCategory'" [isReadOnly]="true" [width]="'*'">  
+                        </wj-flex-grid-column>                                           
+                    </wj-flex-grid>                           
                 </div>
             </div> 
+            <div class="row">
+                <div class="col-sm-6 btn-group">
+                    <button type="submit" class="btn btn-primary pull-left sharp" (click)="openAccountTypeModal(true)">Add</button>
+                </div>       
+                
+                <div class="col-sm-6 btn-group" id="navAccountCategory">
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccountType.moveToFirstPage()">
+                        <span class="glyphicon glyphicon-fast-backward"></span>
+                    </button>
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccountType.moveToPreviousPage()">
+                        <span class="glyphicon glyphicon-step-backward"></span>
+                    </button>
+                    <button type="button" class="btn btn-default pull-right sharp" disabled  style="width:100px">
+                        {{dataAccountType.pageIndex + 1}} / {{dataAccountType.pageCount}}
+                    </button>
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccountType.moveToNextPage()">
+                        <span class="glyphicon glyphicon-step-forward"></span>
+                    </button>
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccountType.moveToLastPage()">
+                        <span class="glyphicon glyphicon-fast-forward"></span>
+                    </button>
+                </div> 
+            </div>             
         </tab>
 
         <tab tabTitle="Account Category">
@@ -132,11 +193,98 @@
         <tab tabTitle="Cash Flow">
             <div class="row">
                 <div class="col-sm-12">
-                    <h4>Chart of Accounts - Cash Flow</h4>    
+                    <h4></h4>    
+                    <wj-flex-grid #flexAccountCashFlow
+                                class="grid" 
+                                [itemsSource]="dataAccountCashFlow">  
+                        
+                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                <button class="btn btn-primary sharp" (click)="openAccountCashFlowModal(false)">
+                                        Edit
+                                </button>
+                            </template>
+                        </wj-flex-grid-column>     
+                                    
+                        <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                            <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                                <button class="btn btn-danger sharp" (click)="delAccountCashFlow()">
+                                        Del
+                                </button>
+                            </template>
+                        </wj-flex-grid-column>    
+                        
+                        <wj-flex-grid-column [header]="'Code'" [binding]="'accountCashFlowCode'" [isReadOnly]="true" [width]="100">  
+                        </wj-flex-grid-column>     
+                            
+                        <wj-flex-grid-column [header]="'Cash Flow'" [binding]="'accountCashFlow'" [isReadOnly]="true" [width]="'*'">  
+                        </wj-flex-grid-column>     
+                                                
+                    </wj-flex-grid>                      
                 </div>
             </div> 
+            <div class="row">
+                <div class="col-sm-6 btn-group">
+                    <button type="submit" class="btn btn-primary pull-left sharp" (click)="openAccountCashFlowModal(true)">Add</button>
+                </div>       
+                
+                <div class="col-sm-6 btn-group" id="navAccountCategory">
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccountCashFlow.moveToFirstPage()">
+                        <span class="glyphicon glyphicon-fast-backward"></span>
+                    </button>
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccountCashFlow.moveToPreviousPage()">
+                        <span class="glyphicon glyphicon-step-backward"></span>
+                    </button>
+                    <button type="button" class="btn btn-default pull-right sharp" disabled  style="width:100px">
+                        {{dataAccountCashFlow.pageIndex + 1}} / {{dataAccountCashFlow.pageCount}}
+                    </button>
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccountCashFlow.moveToNextPage()">
+                        <span class="glyphicon glyphicon-step-forward"></span>
+                    </button>
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccountCashFlow.moveToLastPage()">
+                        <span class="glyphicon glyphicon-fast-forward"></span>
+                    </button>
+                </div> 
+            </div>             
         </tab>   
              
     </tabs>   
     
 </section>
+
+<button id="openAccountModal" [hidden]="true" data-toggle="modal" data-target="#accountModal"></button>
+<div class="modal fade" id="accountModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Account</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <dl class="dl-horizontal">
+                        <dt>Account Code</dt>
+                        <dd>
+                            <input type="text" class="form-control small" required="required" placeholder="Code">
+                        </dd>
+                        <dt>Account</dt>
+                        <dd>
+                            <input type="text" class="form-control" required="required" placeholder="Account">
+                        </dd>
+                        <dt>Account Type</dt>
+                        <dd>
+                            <input type="text" class="form-control" required="required" placeholder="Account Type">
+                        </dd>
+                        <dt>Cash Flow</dt>
+                        <dd>
+                            <input type="text" class="form-control" required="required" placeholder="Cash Flow">
+                        </dd>
+                    </dl>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger pull-right sharp" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary pull-right sharp" (click)="saveAccount()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

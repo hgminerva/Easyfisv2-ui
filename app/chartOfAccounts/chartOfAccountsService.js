@@ -37,7 +37,33 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                                 data.push({
                                     id: response.json()[key].Id,
                                     accountCode: response.json()[key].AccountCode,
-                                    account: response.json()[key].Account
+                                    account: response.json()[key].Account,
+                                    accountType: response.json()[key].AccountType,
+                                    accountCashFlow: response.json()[key].AccountCashFlow
+                                });
+                            }
+                        }
+                    }, function (error) {
+                        alert(error.text());
+                        console.log(error.text());
+                    });
+                    return data;
+                };
+                ChartOfAccountsService.prototype.getAccountTypes = function () {
+                    var data = new wijmo.collections.ObservableArray();
+                    var url = "http://api.accountico.io/api/MstAccountType";
+                    var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
+                    var options = new http_1.RequestOptions({ headers: headers });
+                    this.http.get(url, options)
+                        .subscribe(function (response) {
+                        for (var key in response.json()) {
+                            if (response.json().hasOwnProperty(key)) {
+                                data.push({
+                                    id: response.json()[key].Id,
+                                    accountTypeCode: response.json()[key].AccountTypeCode,
+                                    accountType: response.json()[key].AccountType,
+                                    accountCategory: response.json()[key].AccountCategory,
+                                    subCategoryDescription: response.json()[key].SubCategoryDescription
                                 });
                             }
                         }
@@ -60,6 +86,28 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                                     id: response.json()[key].Id,
                                     accountCategoryCode: response.json()[key].AccountCategoryCode,
                                     accountCategory: response.json()[key].AccountCategory
+                                });
+                            }
+                        }
+                    }, function (error) {
+                        alert(error.text());
+                        console.log(error.text());
+                    });
+                    return data;
+                };
+                ChartOfAccountsService.prototype.getAccountCashFlow = function () {
+                    var data = new wijmo.collections.ObservableArray();
+                    var url = "http://api.accountico.io/api/MstAccountCashFlow";
+                    var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
+                    var options = new http_1.RequestOptions({ headers: headers });
+                    this.http.get(url, options)
+                        .subscribe(function (response) {
+                        for (var key in response.json()) {
+                            if (response.json().hasOwnProperty(key)) {
+                                data.push({
+                                    id: response.json()[key].Id,
+                                    accountCashFlowCode: response.json()[key].AccountCashFlowCode,
+                                    accountCashFlow: response.json()[key].AccountCashFlow
                                 });
                             }
                         }

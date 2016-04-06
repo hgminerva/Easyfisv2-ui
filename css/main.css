@@ -824,13 +824,12 @@ ul.tag-cloud li {
 }
 .modal .modal-header {
   border: 0;
-  padding: 20px 20px 0;
+  padding: 20px 20px 20px 20px;
 }
 .modal .modal-header > h4 {
   font-weight: 300;
   font-size: 14px;
   color: #848484;
-  text-transform: uppercase;
   margin: 0;
 }
 .modal .modal-body {
