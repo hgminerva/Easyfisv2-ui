@@ -1,6 +1,7 @@
 import {Component, OnInit, Inject} from 'angular2/core';
 import {Router} from 'angular2/router';
 import * as wjNg2FlexGrid from 'wijmo/wijmo.angular2.grid';
+import * as wjNg2Input from 'wijmo/wijmo.angular2.input';
 
 import {ChartOfAccountsTabs} from '../chartOfAccounts/chartOfAccountsTabs';
 import {ChartOfAccountsTab} from '../chartOfAccounts/chartOfAccountsTab';
@@ -12,6 +13,7 @@ import {ChartOfAccountsService} from '../chartOfAccounts/ChartOfAccountsService'
   directives: [ wjNg2FlexGrid.WjFlexGrid, 
                 wjNg2FlexGrid.WjFlexGridColumn, 
                 wjNg2FlexGrid.WjFlexGridCellTemplate,
+                wjNg2Input.WjComboBox,
                 ChartOfAccountsTabs, 
                 ChartOfAccountsTab ],
    providers: [ChartOfAccountsService]
@@ -24,6 +26,19 @@ export class ChartOfAccountsComponent implements OnInit {
     private dataAccountType : wijmo.collections.CollectionView;
     private dataAccount : wijmo.collections.CollectionView;
     
+    private accountCodeMem1 : string;
+    private accountMem1 : string;
+    
+    private accountCategoryCodeMem2 : string;
+    private accountCategoryMem2 : string;
+        
+    private accountTypeCodeMem3 : string;
+    private accountTypeMem3 : string;        
+    private subCategoryDescriptionMem3 : string;    
+    
+    private accountCashFlowCodeMem4 : string;
+    private accountCashFlowMem4 : string;        
+            
     private router : Router;
     
     constructor (_router: Router, 
@@ -61,52 +76,82 @@ export class ChartOfAccountsComponent implements OnInit {
         this.dataAccountCashFlow.refresh();
     }
     
+    // ACCOUNT
+    
     openAccountModal(add) {
         document.getElementById("openAccountModal").click();
         if(add==true) {
-            //alert("Add");
+            this.accountCodeMem1 = "";
+            this.accountMem1 = "";
         } else {
-            //alert("Edit: " + this.dataAccount.currentItem.id);
+            this.accountCodeMem1 = this.dataAccount.currentItem.accountCode;
+            this.accountMem1 = this.dataAccount.currentItem.account;  
+            
+            this.dataAccountType.moveCurrentToFirst();
+            this.dataAccountCashFlow.moveCurrentToFirst();
         }
     }
     
     delAccount() {
-        alert("Delete: " + this.dataAccount.currentItem.id);
+        document.getElementById("openDelAccountModal").click();
+        this.accountMem1 = this.dataAccount.currentItem.account;  
     }  
     
+    // ACCOUNT TYPE
+    
     openAccountTypeModal(add) {
+        document.getElementById("openAccountTypeModal").click();
         if(add==true) {
-            alert("Add");
+            this.accountTypeCodeMem3 = "";
+            this.accountTypeMem3 = "";
+            this.subCategoryDescriptionMem3 = ""
         } else {
-            alert("Edit: " + this.dataAccountType.currentItem.id);
+            this.accountTypeCodeMem3 = this.dataAccountType.currentItem.accountTypeCode;
+            this.accountTypeMem3 = this.dataAccountType.currentItem.accountType;
+            this.subCategoryDescriptionMem3 = this.dataAccountType.currentItem.subCategoryDescription;          
+
+            this.dataAccountCategory.moveCurrentToFirst();
         }
     }
     
     delAccountType() {
-        alert("Delete: " + this.dataAccountType.currentItem.id);
+        document.getElementById("openDelAccountTypeModal").click();
+        this.accountTypeMem3 = this.dataAccountType.currentItem.accountType;  
     }      
-        
+    
+    // ACCOUNT CATEGORY
+         
     openAccountCategoryModal(add) {
+        document.getElementById("openAccountCategoryModal").click();
         if(add==true) {
-            alert("Add");
+            this.accountCategoryCodeMem2 = "";
+            this.accountCategoryMem2 = "";
         } else {
-            alert("Edit: " + this.dataAccountCategory.currentItem.id);
+            this.accountCategoryCodeMem2 = this.dataAccountCategory.currentItem.accountCategoryCode;
+            this.accountCategoryMem2 = this.dataAccountCategory.currentItem.accountCategory;
         }
     }
     
     delAccountCategory() {
-        alert("Delete: " + this.dataAccountCategory.currentItem.id);
+        document.getElementById("openDelAccountCategoryModal").click();
+        this.accountCategoryMem2 = this.dataAccountCategory.currentItem.accountCategory;  
     }    
+    
+    // CASH FLOW 
         
     openAccountCashFlowModal(add) {
+        document.getElementById("openAccountCashFlowModal").click();
         if(add==true) {
-            alert("Add");
+            this.accountCashFlowCodeMem4 = "";
+            this.accountCashFlowMem4 = "";
         } else {
-            alert("Edit: " + this.dataAccountCashFlow.currentItem.id);
+            this.accountCashFlowCodeMem4 = this.dataAccountCashFlow.currentItem.accountCashFlowCode;
+            this.accountCashFlowMem4 = this.dataAccountCashFlow.currentItem.accountCashFlow;
         }
     }
     
     delAccountCashFlow() {
-        alert("Delete: " + this.dataAccountCashFlow.currentItem.id);
+        document.getElementById("openDelAccountCashFlowModal").click();
+        this.accountCashFlowMem4 = this.dataAccountCashFlow.currentItem.accountCashFlow;  
     }    
 }

@@ -59,10 +59,30 @@ textarea,
 }
 
 .modal-header {
-    background-color: #848484;
+    background-color: #428bca;
     color: #ffffff;
 }
 
 .modal .modal-header > h4 {
   color: #ffffff;
+}
+
+.input-30 {
+    width: 30%;
+}
+
+.input-70 {
+    width: 70%;
+}
+
+.modal-header-del {
+  border: 0;
+  background-color: #d9534f;
+  padding: 20px 20px 20px 20px;
+}
+.modal .modal-header-del > h4 {
+  font-weight: 300;
+  font-size: 14px;
+  color: #ffffff;
+  margin: 0;
 }

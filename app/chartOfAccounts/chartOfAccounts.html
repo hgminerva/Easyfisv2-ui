@@ -252,7 +252,32 @@
     
 </section>
 
+<button id="openDelAccountModal" [hidden]="true" data-toggle="modal" data-target="#delAccountModal"></button>
 <button id="openAccountModal" [hidden]="true" data-toggle="modal" data-target="#accountModal"></button>
+<button id="openDelAccountCategoryModal" [hidden]="true" data-toggle="modal" data-target="#delAccountCategoryModal"></button>
+<button id="openAccountCategoryModal" [hidden]="true" data-toggle="modal" data-target="#accountCategoryModal"></button>
+<button id="openDelAccountTypeModal" [hidden]="true" data-toggle="modal" data-target="#delAccountTypeModal"></button>
+<button id="openAccountTypeModal" [hidden]="true" data-toggle="modal" data-target="#accountTypeModal"></button>
+<button id="openDelAccountCashFlowModal" [hidden]="true" data-toggle="modal" data-target="#delAccountCashFlowModal"></button>
+<button id="openAccountCashFlowModal" [hidden]="true" data-toggle="modal" data-target="#accountCashFlowModal"></button>
+
+<div class="modal fade" id="delAccountModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header-del">
+                <h4 class="modal-title">Account Delete</h4>
+            </div>
+            <div class="modal-body">
+                <p>Delete {{accountMem1}}? </p>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary pull-right sharp" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-danger pull-right sharp" (click)="delAccount()">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+    
 <div class="modal fade" id="accountModal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -264,19 +289,37 @@
                     <dl class="dl-horizontal">
                         <dt>Account Code</dt>
                         <dd>
-                            <input type="text" class="form-control small" required="required" placeholder="Code">
+                            <input [(ngModel)]="accountCodeMem1" type="text" class="form-control" required="required" placeholder="Code">
                         </dd>
                         <dt>Account</dt>
                         <dd>
-                            <input type="text" class="form-control" required="required" placeholder="Account">
+                            <input [(ngModel)]="accountMem1" type="text" class="form-control" required="required" placeholder="Account">
                         </dd>
                         <dt>Account Type</dt>
                         <dd>
-                            <input type="text" class="form-control" required="required" placeholder="Account Type">
+                            <wj-combo-box class="input-30" 
+                                          [itemsSource]="dataAccountType"
+                                          [displayMemberPath]="'accountTypeCode'"
+                                          [isEditable]="false">
+                            </wj-combo-box>        
+                            <wj-combo-box class="input-70 pull-right" 
+                                          [itemsSource]="dataAccountType"
+                                          [displayMemberPath]="'accountType'"
+                                          [isEditable]="false">
+                            </wj-combo-box>                                              
                         </dd>
                         <dt>Cash Flow</dt>
                         <dd>
-                            <input type="text" class="form-control" required="required" placeholder="Cash Flow">
+                            <wj-combo-box class="input-30" 
+                                          [itemsSource]="dataAccountCashFlow"
+                                          [displayMemberPath]="'accountCashFlowCode'"
+                                          [isEditable]="false">
+                            </wj-combo-box>        
+                            <wj-combo-box class="input-70 pull-right" 
+                                          [itemsSource]="dataAccountCashFlow"
+                                          [displayMemberPath]="'accountCashFlow'"
+                                          [isEditable]="false">
+                            </wj-combo-box>  
                         </dd>
                     </dl>
                 </form>
@@ -284,6 +327,158 @@
             <div class="modal-footer">
                 <button type="submit" class="btn btn-danger pull-right sharp" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary pull-right sharp" (click)="saveAccount()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="delAccountCategoryModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header-del">
+                <h4 class="modal-title">Account Category Delete</h4>
+            </div>
+            <div class="modal-body">
+                <p>Delete {{accountCategoryMem2}}? </p>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary pull-right sharp" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-danger pull-right sharp" (click)="delAccountCategory()">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="accountCategoryModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Account Category</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <dl class="dl-horizontal">
+                        <dt>Account CategoryCode</dt>
+                        <dd>
+                            <input [(ngModel)]="accountCategoryCodeMem2" type="text" class="form-control" required="required" placeholder="Code">
+                        </dd>
+                        <dt>Account Category</dt>
+                        <dd>
+                            <input [(ngModel)]="accountCategoryMem2" type="text" class="form-control" required="required" placeholder="Account">
+                        </dd>
+                    </dl>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger pull-right sharp" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary pull-right sharp" (click)="saveAccountCategory()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="delAccountTypeModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header-del">
+                <h4 class="modal-title">Account Type Delete</h4>
+            </div>
+            <div class="modal-body">
+                <p>Delete {{accountTypeMem3}}? </p>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary pull-right sharp" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-danger pull-right sharp" (click)="delAccountType()">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="accountTypeModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Account Type</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <dl class="dl-horizontal">
+                        <dt>Account Type Code</dt>
+                        <dd>
+                            <input [(ngModel)]="accountTypeCodeMem3" type="text" class="form-control" required="required" placeholder="Code">
+                        </dd>
+                        <dt>Account Type</dt>
+                        <dd>
+                            <input [(ngModel)]="accountTypeMem3" type="text" class="form-control" required="required" placeholder="Account">
+                        </dd>
+                        <dt>Subcategory</dt>
+                        <dd>
+                            <input [(ngModel)]="subCategoryDescriptionMem3" type="text" class="form-control" required="required" placeholder="Account">
+                        </dd>
+                        <dt>Account Category</dt>
+                        <dd>
+                            <wj-combo-box class="input-30" 
+                                          [itemsSource]="dataAccountCategory"
+                                          [displayMemberPath]="'accountCategoryCode'"
+                                          [isEditable]="false">
+                            </wj-combo-box>        
+                            <wj-combo-box class="input-70 pull-right" 
+                                          [itemsSource]="dataAccountCategory"
+                                          [displayMemberPath]="'accountCategory'"
+                                          [isEditable]="false">
+                            </wj-combo-box>  
+                        </dd>
+                    </dl>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger pull-right sharp" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary pull-right sharp" (click)="saveAccountType()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="delAccountCashFlowModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header-del">
+                <h4 class="modal-title">Account Cash Flow Delete</h4>
+            </div>
+            <div class="modal-body">
+                <p>Delete {{accountCashFlowMem4}}? </p>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary pull-right sharp" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-danger pull-right sharp" (click)="delAccountCashFlow()">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="accountCashFlowModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Account Cash Flow</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <dl class="dl-horizontal">
+                        <dt>Account Cash Flow Code</dt>
+                        <dd>
+                            <input [(ngModel)]="accountCashFlowCodeMem4" type="text" class="form-control" required="required" placeholder="Code">
+                        </dd>
+                        <dt>Account Cash Flow</dt>
+                        <dd>
+                            <input [(ngModel)]="accountCashFlowMem4" type="text" class="form-control" required="required" placeholder="Account">
+                        </dd>
+                    </dl>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger pull-right sharp" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary pull-right sharp" (click)="saveAccountCashFlow()">Save</button>
             </div>
         </div>
     </div>
