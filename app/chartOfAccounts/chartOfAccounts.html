@@ -10,7 +10,7 @@
                     <h4></h4>    
                     <wj-flex-grid #flexAccount
                                 class="grid" 
-                                [itemsSource]="dataAccount">  
+                                [itemsSource]="collectionAccount">  
                         
                         <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
                             <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
@@ -22,7 +22,7 @@
                                     
                         <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
                             <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                <button class="btn btn-danger sharp" (click)="delAccount()">
+                                <button class="btn btn-danger sharp" (click)="openDelAccountModal()">
                                         Del
                                 </button>
                             </template>
@@ -50,19 +50,19 @@
                 </div>       
                 
                 <div class="col-sm-6 btn-group" id="navAccountCategory">
-                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccount.moveToFirstPage()">
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="collectionAccount.moveToFirstPage()">
                         <span class="glyphicon glyphicon-fast-backward"></span>
                     </button>
-                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccount.moveToPreviousPage()">
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="collectionAccount.moveToPreviousPage()">
                         <span class="glyphicon glyphicon-step-backward"></span>
                     </button>
                     <button type="button" class="btn btn-default pull-right sharp" disabled  style="width:100px">
-                        {{dataAccount.pageIndex + 1}} / {{dataAccount.pageCount}}
+                        {{collectionAccount.pageIndex + 1}} / {{collectionAccount.pageCount}}
                     </button>
-                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccount.moveToNextPage()">
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="collectionAccount.moveToNextPage()">
                         <span class="glyphicon glyphicon-step-forward"></span>
                     </button>
-                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccount.moveToLastPage()">
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="collectionAccount.moveToLastPage()">
                         <span class="glyphicon glyphicon-fast-forward"></span>
                     </button>
                 </div> 
@@ -75,7 +75,7 @@
                     <h4></h4>   
                     <wj-flex-grid #flexAccountType
                                   class="grid" 
-                                  [itemsSource]="dataAccountType">  
+                                  [itemsSource]="collectionAccountType">  
                         
                         <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
                             <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
@@ -87,7 +87,7 @@
                                     
                         <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
                             <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                <button class="btn btn-danger sharp" (click)="delAccountType()">
+                                <button class="btn btn-danger sharp" (click)="openDelAccountTypeModal()">
                                         Del
                                 </button>
                             </template>
@@ -113,19 +113,19 @@
                 </div>       
                 
                 <div class="col-sm-6 btn-group" id="navAccountCategory">
-                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccountType.moveToFirstPage()">
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="collectionAccountType.moveToFirstPage()">
                         <span class="glyphicon glyphicon-fast-backward"></span>
                     </button>
-                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccountType.moveToPreviousPage()">
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="collectionAccountType.moveToPreviousPage()">
                         <span class="glyphicon glyphicon-step-backward"></span>
                     </button>
                     <button type="button" class="btn btn-default pull-right sharp" disabled  style="width:100px">
-                        {{dataAccountType.pageIndex + 1}} / {{dataAccountType.pageCount}}
+                        {{collectionAccountType.pageIndex + 1}} / {{collectionAccountType.pageCount}}
                     </button>
-                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccountType.moveToNextPage()">
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="collectionAccountType.moveToNextPage()">
                         <span class="glyphicon glyphicon-step-forward"></span>
                     </button>
-                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccountType.moveToLastPage()">
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="collectionAccountType.moveToLastPage()">
                         <span class="glyphicon glyphicon-fast-forward"></span>
                     </button>
                 </div> 
@@ -138,7 +138,7 @@
                     <h4></h4>    
                     <wj-flex-grid #flexAccountCategory 
                                 class="grid" 
-                                [itemsSource]="dataAccountCategory">  
+                                [itemsSource]="collectionAccountCategory">  
                         
                         <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
                             <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
@@ -150,7 +150,7 @@
                                     
                         <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
                             <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                <button class="btn btn-danger sharp" (click)="delAccountCategory()">
+                                <button class="btn btn-danger sharp" (click)="openDelAccountCategoryModal()">
                                         Del
                                 </button>
                             </template>
@@ -171,19 +171,19 @@
                 </div>       
                 
                 <div class="col-sm-6 btn-group" id="navAccountCategory">
-                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccountCategory.moveToFirstPage()">
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="collectionAccountCategory.moveToFirstPage()">
                         <span class="glyphicon glyphicon-fast-backward"></span>
                     </button>
-                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccountCategory.moveToPreviousPage()">
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="collectionAccountCategory.moveToPreviousPage()">
                         <span class="glyphicon glyphicon-step-backward"></span>
                     </button>
                     <button type="button" class="btn btn-default pull-right sharp" disabled  style="width:100px">
-                        {{dataAccountCategory.pageIndex + 1}} / {{dataAccountCategory.pageCount}}
+                        {{collectionAccountCategory.pageIndex + 1}} / {{collectionAccountCategory.pageCount}}
                     </button>
-                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccountCategory.moveToNextPage()">
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="collectionAccountCategory.moveToNextPage()">
                         <span class="glyphicon glyphicon-step-forward"></span>
                     </button>
-                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccountCategory.moveToLastPage()">
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="collectionAccountCategory.moveToLastPage()">
                         <span class="glyphicon glyphicon-fast-forward"></span>
                     </button>
                 </div> 
@@ -196,7 +196,7 @@
                     <h4></h4>    
                     <wj-flex-grid #flexAccountCashFlow
                                 class="grid" 
-                                [itemsSource]="dataAccountCashFlow">  
+                                [itemsSource]="collectionAccountCashFlow">  
                         
                         <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
                             <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
@@ -208,7 +208,7 @@
                                     
                         <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
                             <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                                <button class="btn btn-danger sharp" (click)="delAccountCashFlow()">
+                                <button class="btn btn-danger sharp" (click)="openDelAccountCashFlowModal()">
                                         Del
                                 </button>
                             </template>
@@ -229,19 +229,19 @@
                 </div>       
                 
                 <div class="col-sm-6 btn-group" id="navAccountCategory">
-                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccountCashFlow.moveToFirstPage()">
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="collectionAccountCashFlow.moveToFirstPage()">
                         <span class="glyphicon glyphicon-fast-backward"></span>
                     </button>
-                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccountCashFlow.moveToPreviousPage()">
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="collectionAccountCashFlow.moveToPreviousPage()">
                         <span class="glyphicon glyphicon-step-backward"></span>
                     </button>
                     <button type="button" class="btn btn-default pull-right sharp" disabled  style="width:100px">
-                        {{dataAccountCashFlow.pageIndex + 1}} / {{dataAccountCashFlow.pageCount}}
+                        {{collectionAccountCashFlow.pageIndex + 1}} / {{collectionAccountCashFlow.pageCount}}
                     </button>
-                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccountCashFlow.moveToNextPage()">
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="collectionAccountCashFlow.moveToNextPage()">
                         <span class="glyphicon glyphicon-step-forward"></span>
                     </button>
-                    <button type="button" class="btn btn-default pull-right sharp" (click)="dataAccountCashFlow.moveToLastPage()">
+                    <button type="button" class="btn btn-default pull-right sharp" (click)="collectionAccountCashFlow.moveToLastPage()">
                         <span class="glyphicon glyphicon-fast-forward"></span>
                     </button>
                 </div> 
@@ -271,7 +271,7 @@
                 <p>Delete {{accountMem1}}? </p>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary pull-right sharp" data-dismiss="modal">Close</button>
+                <button id="closeDelAccountModal" type="submit" class="btn btn-primary pull-right sharp" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-danger pull-right sharp" (click)="delAccount()">Delete</button>
             </div>
         </div>
@@ -298,26 +298,38 @@
                         <dt>Account Type</dt>
                         <dd>
                             <wj-combo-box class="input-30" 
+                                          [(text)]="accountTypeCodeMem1"
                                           [itemsSource]="dataAccountType"
                                           [displayMemberPath]="'accountTypeCode'"
+                                          [(selectedIndex)]="dataAccountType_Index"
+                                          (selectedIndexChanged)="dataAccountType_Index_Update()"
                                           [isEditable]="false">
                             </wj-combo-box>        
                             <wj-combo-box class="input-70 pull-right" 
+                                          [(text)]="accountTypeMem1"
                                           [itemsSource]="dataAccountType"
                                           [displayMemberPath]="'accountType'"
+                                          [(selectedIndex)]="dataAccountType_Index"
+                                          (selectedIndexChanged)="dataAccountType_Index_Update()"
                                           [isEditable]="false">
                             </wj-combo-box>                                              
                         </dd>
                         <dt>Cash Flow</dt>
                         <dd>
                             <wj-combo-box class="input-30" 
+                                          [(text)]="accountCashFlowCodeMem1"
                                           [itemsSource]="dataAccountCashFlow"
                                           [displayMemberPath]="'accountCashFlowCode'"
+                                          [(selectedIndex)]="dataAccountCashFlow_Index"
+                                          (selectedIndexChanged)="dataAccountCashFlow_Index_Update()"
                                           [isEditable]="false">
                             </wj-combo-box>        
                             <wj-combo-box class="input-70 pull-right" 
+                                          [(text)]="accountCashFlowMem1"
                                           [itemsSource]="dataAccountCashFlow"
                                           [displayMemberPath]="'accountCashFlow'"
+                                          [(selectedIndex)]="dataAccountCashFlow_Index"
+                                          (selectedIndexChanged)="dataAccountCashFlow_Index_Update()"                                          
                                           [isEditable]="false">
                             </wj-combo-box>  
                         </dd>
@@ -325,7 +337,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-danger pull-right sharp" data-dismiss="modal">Close</button>
+                <button id="closeAccountModal" type="submit" class="btn btn-danger pull-right sharp" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary pull-right sharp" (click)="saveAccount()">Save</button>
             </div>
         </div>
@@ -342,7 +354,7 @@
                 <p>Delete {{accountCategoryMem2}}? </p>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary pull-right sharp" data-dismiss="modal">Close</button>
+                <button id="closeDelAccountCategoryModal" type="submit" class="btn btn-primary pull-right sharp" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-danger pull-right sharp" (click)="delAccountCategory()">Delete</button>
             </div>
         </div>
@@ -370,7 +382,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-danger pull-right sharp" data-dismiss="modal">Close</button>
+                <button id="closeAccountCategoryModal" type="submit" class="btn btn-danger pull-right sharp" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary pull-right sharp" (click)="saveAccountCategory()">Save</button>
             </div>
         </div>
@@ -387,7 +399,7 @@
                 <p>Delete {{accountTypeMem3}}? </p>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary pull-right sharp" data-dismiss="modal">Close</button>
+                <button id="closeDelAccountTypeModal" type="submit" class="btn btn-primary pull-right sharp" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-danger pull-right sharp" (click)="delAccountType()">Delete</button>
             </div>
         </div>
@@ -418,13 +430,19 @@
                         <dt>Account Category</dt>
                         <dd>
                             <wj-combo-box class="input-30" 
+                                          [(text)]="accountCategoryCodeMem3"
                                           [itemsSource]="dataAccountCategory"
                                           [displayMemberPath]="'accountCategoryCode'"
+                                          [(selectedIndex)]="dataAccountCategory_Index"
+                                          (selectedIndexChanged)="dataAccountCategory_Index_Update()"
                                           [isEditable]="false">
                             </wj-combo-box>        
                             <wj-combo-box class="input-70 pull-right" 
+                                          [(text)]="accountCategoryMem3"
                                           [itemsSource]="dataAccountCategory"
                                           [displayMemberPath]="'accountCategory'"
+                                          [(selectedIndex)]="dataAccountCategory_Index"
+                                          (selectedIndexChanged)="dataAccountCategory_Index_Update()"
                                           [isEditable]="false">
                             </wj-combo-box>  
                         </dd>
@@ -432,7 +450,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-danger pull-right sharp" data-dismiss="modal">Close</button>
+                <button id="closeAccountTypeModal" type="submit" class="btn btn-danger pull-right sharp" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary pull-right sharp" (click)="saveAccountType()">Save</button>
             </div>
         </div>
@@ -449,7 +467,7 @@
                 <p>Delete {{accountCashFlowMem4}}? </p>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary pull-right sharp" data-dismiss="modal">Close</button>
+                <button id="closeDelAccountCashFlowModal" type="submit" class="btn btn-primary pull-right sharp" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-danger pull-right sharp" (click)="delAccountCashFlow()">Delete</button>
             </div>
         </div>
@@ -477,7 +495,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-danger pull-right sharp" data-dismiss="modal">Close</button>
+                <button id="closeAccountCashFlowModal" type="submit" class="btn btn-danger pull-right sharp" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary pull-right sharp" (click)="saveAccountCashFlow()">Save</button>
             </div>
         </div>

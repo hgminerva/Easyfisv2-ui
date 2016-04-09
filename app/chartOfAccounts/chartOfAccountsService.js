@@ -38,7 +38,9 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                                     id: response.json()[key].Id,
                                     accountCode: response.json()[key].AccountCode,
                                     account: response.json()[key].Account,
+                                    accountTypeId: response.json()[key].AccountTypeId,
                                     accountType: response.json()[key].AccountType,
+                                    accountCashFlowId: response.json()[key].AccountCashFlowId,
                                     accountCashFlow: response.json()[key].AccountCashFlow
                                 });
                             }
@@ -62,6 +64,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                                     id: response.json()[key].Id,
                                     accountTypeCode: response.json()[key].AccountTypeCode,
                                     accountType: response.json()[key].AccountType,
+                                    accountCategoryId: response.json()[key].AccountCategoryId,
                                     accountCategory: response.json()[key].AccountCategory,
                                     subCategoryDescription: response.json()[key].SubCategoryDescription
                                 });
