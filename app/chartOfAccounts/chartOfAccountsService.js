@@ -25,7 +25,10 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                 function ChartOfAccountsService(_http) {
                     this.http = _http;
                 }
-                ChartOfAccountsService.prototype.getAccounts = function () {
+                // =======
+                // ACCOUNT
+                // =======
+                ChartOfAccountsService.prototype.getAccounts = function (component) {
                     var data = new wijmo.collections.ObservableArray();
                     var url = "http://api.accountico.io/api/MstAccount";
                     var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
@@ -46,11 +49,64 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                             }
                         }
                     }, function (error) {
-                        alert(error.text());
-                        console.log(error.text());
+                        component.toastr.error('Get Error', '');
                     });
                     return data;
                 };
+                ChartOfAccountsService.prototype.addAccount = function (data, component) {
+                    var url = "http://api.accountico.io/api/MstAccount";
+                    var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
+                    headers.append('Content-Type', 'application/json');
+                    var options = new http_1.RequestOptions({ headers: headers });
+                    this.http.post(url, JSON.stringify(data), options)
+                        .subscribe(function (response) {
+                        if (response.status == 200) {
+                            component.createAccountCollection();
+                            component.toastr.success('Save Successfull', '');
+                        }
+                        else {
+                            component.toastr.error('Save Error', '');
+                        }
+                    });
+                    ;
+                };
+                ChartOfAccountsService.prototype.updateAccount = function (data, component) {
+                    var url = "http://api.accountico.io/api/MstAccount/" + data.Id;
+                    var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
+                    headers.append('Content-Type', 'application/json');
+                    var options = new http_1.RequestOptions({ headers: headers });
+                    this.http.put(url, JSON.stringify(data), options)
+                        .subscribe(function (response) {
+                        if (response.status == 200) {
+                            component.createAccountCollection();
+                            component.toastr.success('Update Successfull', '');
+                        }
+                        else {
+                            component.toastr.error('Update Error', '');
+                        }
+                    });
+                    ;
+                };
+                ChartOfAccountsService.prototype.deleteAccount = function (data, dataCollections, toastr) {
+                    var id = data.id;
+                    var url = "http://api.accountico.io/api/MstAccount/" + id;
+                    var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
+                    var options = new http_1.RequestOptions({ headers: headers });
+                    this.http.delete(url, options)
+                        .subscribe(function (response) {
+                        if (response.status == 200) {
+                            dataCollections.remove(data);
+                            toastr.success('Delete Successfull', '');
+                        }
+                        else {
+                            toastr.error('Delete Error', '');
+                        }
+                    });
+                    ;
+                };
+                // ============
+                // ACCOUNT TYPE
+                // ============
                 ChartOfAccountsService.prototype.getAccountTypes = function () {
                     var data = new wijmo.collections.ObservableArray();
                     var url = "http://api.accountico.io/api/MstAccountType";
@@ -76,6 +132,9 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     });
                     return data;
                 };
+                // ================
+                // ACCOUNT CATEGORY
+                // ================            
                 ChartOfAccountsService.prototype.getAccountCategories = function () {
                     var data = new wijmo.collections.ObservableArray();
                     var url = "http://api.accountico.io/api/MstAccountCategory";
@@ -98,6 +157,9 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                     });
                     return data;
                 };
+                // =========
+                // CASH FLOW 
+                // =========
                 ChartOfAccountsService.prototype.getAccountCashFlow = function () {
                     var data = new wijmo.collections.ObservableArray();
                     var url = "http://api.accountico.io/api/MstAccountCashFlow";
