@@ -24,41 +24,44 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 export class ChartOfAccountsComponent implements OnInit {
     protected chartOfAccountsService: ChartOfAccountsService; 
     
-    private dataAccountCategory : wijmo.collections.ObservableArray;
-    private dataAccountCashFlow : wijmo.collections.ObservableArray;
-    private dataAccountType : wijmo.collections.ObservableArray;
-    private dataAccount : wijmo.collections.ObservableArray;
+    public dataAccountCategory : wijmo.collections.ObservableArray;
+    public dataAccountCashFlow : wijmo.collections.ObservableArray;
+    public dataAccountType : wijmo.collections.ObservableArray;
+    public dataAccount : wijmo.collections.ObservableArray;
     
-    private dataAccountType_Index : number;
-    private dataAccountCashFlow_Index : number;
-    private dataAccountCategory_Index : number;
+    public dataAccountType_Index : number;
+    public dataAccountCashFlow_Index : number;
+    public dataAccountCategory_Index : number;
     
-    private collectionAccountCategory : wijmo.collections.CollectionView;
-    private collectionAccountCashFlow : wijmo.collections.CollectionView;
-    private collectionAccountType : wijmo.collections.CollectionView;
-    private collectionAccount : wijmo.collections.CollectionView;
+    public collectionAccountCategory : wijmo.collections.CollectionView;
+    public collectionAccountCashFlow : wijmo.collections.CollectionView;
+    public collectionAccountType : wijmo.collections.CollectionView;
+    public collectionAccount : wijmo.collections.CollectionView;
     
-    private accountIdMem1 : number;
-    private accountCodeMem1 : string;
-    private accountMem1 : string;
-    private accountTypeMem1 : string;
-    private accountTypeCodeMem1 : string;
-    private accountCashFlowMem1 : string;
-    private accountCashFlowCodeMem1 : string;
+    public accountIdMem1 : number;
+    public accountCodeMem1 : string;
+    public accountMem1 : string;
+    public accountTypeMem1 : string;
+    public accountTypeCodeMem1 : string;
+    public accountCashFlowMem1 : string;
+    public accountCashFlowCodeMem1 : string;
     
-    private accountCategoryCodeMem2 : string;
-    private accountCategoryMem2 : string;
+    public accountCategoryIdMem2 : number; 
+    public accountCategoryCodeMem2 : string;
+    public accountCategoryMem2 : string;
         
-    private accountTypeCodeMem3 : string;
-    private accountTypeMem3 : string;        
-    private subCategoryDescriptionMem3 : string;    
-    private accountCategoryMem3 : string;
-    private accountCategoryCodeMem3 : string;    
+    public accountTypeIdMem3 : number;    
+    public accountTypeCodeMem3 : string;
+    public accountTypeMem3 : string;        
+    public subCategoryDescriptionMem3 : string;    
+    public accountCategoryMem3 : string;
+    public accountCategoryCodeMem3 : string;    
     
-    private accountCashFlowCodeMem4 : string;
-    private accountCashFlowMem4 : string;        
+    public accountCashFlowIdMem4 : number;
+    public accountCashFlowCodeMem4 : string;
+    public accountCashFlowMem4 : string;        
             
-    private router : Router;
+    public router : Router;
     public toastr : ToastsManager;
     
     constructor (_router: Router, 
@@ -74,24 +77,9 @@ export class ChartOfAccountsComponent implements OnInit {
             this.router.navigate(['Login']);
         } else {
             this.createAccountCollection();
-            
-            this.dataAccountType = this.chartOfAccountsService.getAccountTypes();       
-            this.dataAccountType_Index = 0;            
-            this.collectionAccountType = new wijmo.collections.CollectionView(this.dataAccountType);
-            this.collectionAccountType.pageSize = 10; 
-            this.collectionAccountType.trackChanges = true;    
-                               
-            this.dataAccountCategory = this.chartOfAccountsService.getAccountCategories();  
-            this.dataAccountCategory_Index = 0;                     
-            this.collectionAccountCategory = new wijmo.collections.CollectionView(this.dataAccountCategory);
-            this.collectionAccountCategory.pageSize = 10; 
-            this.collectionAccountCategory.trackChanges = true;     
-            
-            this.dataAccountCashFlow = this.chartOfAccountsService.getAccountCashFlow();
-            this.dataAccountCashFlow_Index = 0;    
-            this.collectionAccountCashFlow = new wijmo.collections.CollectionView(this.dataAccountCashFlow);
-            this.collectionAccountCashFlow.pageSize = 10; 
-            this.collectionAccountCashFlow.trackChanges = true;                       
+            this.createAccountTypeCollection();
+            this.createAccountCategoryCollection();
+            this.createAccountCashFlowCollection();        
         }
     } 
     
@@ -102,6 +90,30 @@ export class ChartOfAccountsComponent implements OnInit {
         this.collectionAccount.trackChanges = true;          
     }
     
+    public createAccountTypeCollection() : void {
+        this.dataAccountType = this.chartOfAccountsService.getAccountTypes(this);       
+        this.dataAccountType_Index = 0;            
+        this.collectionAccountType = new wijmo.collections.CollectionView(this.dataAccountType);
+        this.collectionAccountType.pageSize = 10; 
+        this.collectionAccountType.trackChanges = true;        
+    }
+    
+    public createAccountCategoryCollection() : void {
+        this.dataAccountCategory = this.chartOfAccountsService.getAccountCategories(this);  
+        this.dataAccountCategory_Index = 0;                     
+        this.collectionAccountCategory = new wijmo.collections.CollectionView(this.dataAccountCategory);
+        this.collectionAccountCategory.pageSize = 10; 
+        this.collectionAccountCategory.trackChanges = true;       
+    }    
+    
+    public createAccountCashFlowCollection() : void {
+        this.dataAccountCashFlow = this.chartOfAccountsService.getAccountCashFlow(this);
+        this.dataAccountCashFlow_Index = 0;    
+        this.collectionAccountCashFlow = new wijmo.collections.CollectionView(this.dataAccountCashFlow);
+        this.collectionAccountCashFlow.pageSize = 10; 
+        this.collectionAccountCashFlow.trackChanges = true;    
+    }  
+        
     refresh() {
         this.collectionAccount.refresh();
         this.collectionAccountType.refresh();
@@ -110,18 +122,24 @@ export class ChartOfAccountsComponent implements OnInit {
     }
     
     dataAccountType_Index_Update() {
-        this.accountTypeCodeMem1 = this.dataAccountType[this.dataAccountType_Index].accountTypeCode;
-        this.accountTypeMem1 = this.dataAccountType[this.dataAccountType_Index].accountType;        
+        if(this.dataAccountType_Index >= 0) {
+            this.accountTypeCodeMem1 = this.dataAccountType[this.dataAccountType_Index].accountTypeCode;
+            this.accountTypeMem1 = this.dataAccountType[this.dataAccountType_Index].accountType; 
+        }
     }
     
     dataAccountCashFlow_Index_Update() {
-        this.accountCashFlowCodeMem1 = this.dataAccountCashFlow[this.dataAccountCashFlow_Index].accountCashFlowCode;
-        this.accountCashFlowMem1 = this.dataAccountCashFlow[this.dataAccountCashFlow_Index].accountCashFlow;        
+        if(this.dataAccountCashFlow_Index >= 0){
+            this.accountCashFlowCodeMem1 = this.dataAccountCashFlow[this.dataAccountCashFlow_Index].accountCashFlowCode;
+            this.accountCashFlowMem1 = this.dataAccountCashFlow[this.dataAccountCashFlow_Index].accountCashFlow;        
+        }
     }    
 
     dataAccountCategory_Index_Update() {
-        this.accountCategoryCodeMem3 = this.dataAccountCategory[this.dataAccountCategory_Index].accountCategoryCode;
-        this.accountCategoryMem3 = this.dataAccountCategory[this.dataAccountCategory_Index].accountCategory;        
+        if(this.dataAccountCategory_Index >= 0) {
+            this.accountCategoryCodeMem3 = this.dataAccountCategory[this.dataAccountCategory_Index].accountCategoryCode;
+            this.accountCategoryMem3 = this.dataAccountCategory[this.dataAccountCategory_Index].accountCategory;      
+        }
     }     
     
     // =======
@@ -171,9 +189,7 @@ export class ChartOfAccountsComponent implements OnInit {
     }    
     
     delAccount() {
-        this.chartOfAccountsService.deleteAccount(this.collectionAccount.currentItem, 
-                                                  this.collectionAccount, 
-                                                  this.toastr);
+        this.chartOfAccountsService.deleteAccount(this.collectionAccount.currentItem,this);
         document.getElementById("closeDelAccountModal").click();
     }  
     
@@ -209,6 +225,7 @@ export class ChartOfAccountsComponent implements OnInit {
     openAccountTypeModal(add) {
         document.getElementById("openAccountTypeModal").click();
         if(add==true) {
+            this.accountTypeIdMem3 = 0;
             this.accountTypeCodeMem3 = "";
             this.accountTypeMem3 = "";
             this.subCategoryDescriptionMem3 = ""
@@ -216,6 +233,7 @@ export class ChartOfAccountsComponent implements OnInit {
             this.accountCategoryCodeMem3 = "";
             this.dataAccountCategory_Index = 0;  
         } else {
+            this.accountTypeIdMem3 = this.collectionAccountType.currentItem.id;
             this.accountTypeCodeMem3 = this.collectionAccountType.currentItem.accountTypeCode;
             this.accountTypeMem3 = this.collectionAccountType.currentItem.accountType;
             this.subCategoryDescriptionMem3 = this.collectionAccountType.currentItem.subCategoryDescription;     
@@ -237,12 +255,31 @@ export class ChartOfAccountsComponent implements OnInit {
     
     delAccountType() {
         document.getElementById("closeDelAccountTypeModal").click();
-        this.toastr.success('Delete Successfull', '');
+        this.chartOfAccountsService.deleteAccountType(this.collectionAccountType.currentItem,this);
     }  
     
     saveAccountType() {
+        var data = {
+            Id: this.accountTypeIdMem3,
+            AccountTypeCode: this.accountTypeCodeMem3,
+            AccountType: this.accountTypeMem3,
+            AccountCategoryId: this.dataAccountCategory[this.dataAccountCategory_Index].id,    
+            AccountCategory: this.accountCategoryMem3,
+            SubCategoryDescription: this.subCategoryDescriptionMem3,
+            IsLocked: true,
+            CreatedById: 0,
+            CreatedDateTime: new Date(),
+            UpdatedById: 0,
+            UpdatedDateTime: new Date()        
+        };
+
+        if(this.accountTypeIdMem3 == 0) {
+            this.chartOfAccountsService.addAccountType(data,this);
+        } else {
+            this.chartOfAccountsService.updateAccountType(data,this);
+        }
+                
         document.getElementById("closeAccountTypeModal").click();
-        this.toastr.success('Save Successfull', '');
     }       
     
     // ================
@@ -252,9 +289,11 @@ export class ChartOfAccountsComponent implements OnInit {
     openAccountCategoryModal(add) {
         document.getElementById("openAccountCategoryModal").click();
         if(add==true) {
+            this.accountCategoryIdMem2 = 0;
             this.accountCategoryCodeMem2 = "";
             this.accountCategoryMem2 = "";
         } else {
+            this.accountCategoryIdMem2 = this.collectionAccountCategory.currentItem.id;
             this.accountCategoryCodeMem2 = this.collectionAccountCategory.currentItem.accountCategoryCode;
             this.accountCategoryMem2 = this.collectionAccountCategory.currentItem.accountCategory;
         }
@@ -267,12 +306,28 @@ export class ChartOfAccountsComponent implements OnInit {
     
     delAccountCategory() {
         document.getElementById("closeDelAccountCategoryModal").click();
-        this.toastr.success('Delete Successfull', '');
+        this.chartOfAccountsService.deleteAccountCategory(this.collectionAccountCategory.currentItem,this);
     }  
     
     saveAccountCategory() {
+       var data = {
+            Id: this.accountCategoryIdMem2,
+            AccountCategoryCode: this.accountCategoryMem2,
+            AccountCategory: this.accountCategoryMem2,
+            IsLocked: true,
+            CreatedById: 0,
+            CreatedDateTime: new Date(),
+            UpdatedById: 0,
+            UpdatedDateTime: new Date()        
+        };
+
+        if(this.accountCategoryIdMem2 == 0) {
+            this.chartOfAccountsService.addAccountCategory(data,this);
+        } else {
+            this.chartOfAccountsService.updateAccountCategory(data,this);
+        }
+
         document.getElementById("closeAccountCategoryModal").click();
-        this.toastr.success('Save Successfull', '');
     }     
     
     // =========
@@ -282,9 +337,11 @@ export class ChartOfAccountsComponent implements OnInit {
     openAccountCashFlowModal(add) {
         document.getElementById("openAccountCashFlowModal").click();
         if(add==true) {
+            this.accountCashFlowIdMem4 = 0;
             this.accountCashFlowCodeMem4 = "";
             this.accountCashFlowMem4 = "";
         } else {
+            this.accountCashFlowIdMem4 = this.collectionAccountCashFlow.currentItem.id;
             this.accountCashFlowCodeMem4 = this.collectionAccountCashFlow.currentItem.accountCashFlowCode;
             this.accountCashFlowMem4 = this.collectionAccountCashFlow.currentItem.accountCashFlow;
         }
@@ -297,12 +354,28 @@ export class ChartOfAccountsComponent implements OnInit {
     
     delAccountCashFlow() {
         document.getElementById("closeDelAccountCashFlowModal").click();
-        this.toastr.success('Delete Successfull', '');
+        this.chartOfAccountsService.deleteAccountCashFlow(this.collectionAccountCashFlow.currentItem,this);
     }  
     
     saveAccountCashFlow() {
+       var data = {
+            Id: this.accountCashFlowIdMem4,
+            AccountCashFlowCode: this.accountCashFlowMem4,
+            AccountCashFlow: this.accountCashFlowMem4,
+            IsLocked: true,
+            CreatedById: 0,
+            CreatedDateTime: new Date(),
+            UpdatedById: 0,
+            UpdatedDateTime: new Date()        
+        };
+
+        if(this.accountCashFlowIdMem4 == 0) {
+            this.chartOfAccountsService.addAccountCashFlow(data,this);
+        } else {
+            this.chartOfAccountsService.updateAccountCashFlow(data,this);
+        }
+
         document.getElementById("closeAccountCashFlowModal").click();
-        this.toastr.success('Save Successfull', '');
     }  
       
 }

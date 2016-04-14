@@ -54,21 +54,9 @@ System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid'
                     }
                     else {
                         this.createAccountCollection();
-                        this.dataAccountType = this.chartOfAccountsService.getAccountTypes();
-                        this.dataAccountType_Index = 0;
-                        this.collectionAccountType = new wijmo.collections.CollectionView(this.dataAccountType);
-                        this.collectionAccountType.pageSize = 10;
-                        this.collectionAccountType.trackChanges = true;
-                        this.dataAccountCategory = this.chartOfAccountsService.getAccountCategories();
-                        this.dataAccountCategory_Index = 0;
-                        this.collectionAccountCategory = new wijmo.collections.CollectionView(this.dataAccountCategory);
-                        this.collectionAccountCategory.pageSize = 10;
-                        this.collectionAccountCategory.trackChanges = true;
-                        this.dataAccountCashFlow = this.chartOfAccountsService.getAccountCashFlow();
-                        this.dataAccountCashFlow_Index = 0;
-                        this.collectionAccountCashFlow = new wijmo.collections.CollectionView(this.dataAccountCashFlow);
-                        this.collectionAccountCashFlow.pageSize = 10;
-                        this.collectionAccountCashFlow.trackChanges = true;
+                        this.createAccountTypeCollection();
+                        this.createAccountCategoryCollection();
+                        this.createAccountCashFlowCollection();
                     }
                 };
                 ChartOfAccountsComponent.prototype.createAccountCollection = function () {
@@ -77,6 +65,27 @@ System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid'
                     this.collectionAccount.pageSize = 10;
                     this.collectionAccount.trackChanges = true;
                 };
+                ChartOfAccountsComponent.prototype.createAccountTypeCollection = function () {
+                    this.dataAccountType = this.chartOfAccountsService.getAccountTypes(this);
+                    this.dataAccountType_Index = 0;
+                    this.collectionAccountType = new wijmo.collections.CollectionView(this.dataAccountType);
+                    this.collectionAccountType.pageSize = 10;
+                    this.collectionAccountType.trackChanges = true;
+                };
+                ChartOfAccountsComponent.prototype.createAccountCategoryCollection = function () {
+                    this.dataAccountCategory = this.chartOfAccountsService.getAccountCategories(this);
+                    this.dataAccountCategory_Index = 0;
+                    this.collectionAccountCategory = new wijmo.collections.CollectionView(this.dataAccountCategory);
+                    this.collectionAccountCategory.pageSize = 10;
+                    this.collectionAccountCategory.trackChanges = true;
+                };
+                ChartOfAccountsComponent.prototype.createAccountCashFlowCollection = function () {
+                    this.dataAccountCashFlow = this.chartOfAccountsService.getAccountCashFlow(this);
+                    this.dataAccountCashFlow_Index = 0;
+                    this.collectionAccountCashFlow = new wijmo.collections.CollectionView(this.dataAccountCashFlow);
+                    this.collectionAccountCashFlow.pageSize = 10;
+                    this.collectionAccountCashFlow.trackChanges = true;
+                };
                 ChartOfAccountsComponent.prototype.refresh = function () {
                     this.collectionAccount.refresh();
                     this.collectionAccountType.refresh();
@@ -84,16 +93,22 @@ System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid'
                     this.collectionAccountCashFlow.refresh();
                 };
                 ChartOfAccountsComponent.prototype.dataAccountType_Index_Update = function () {
-                    this.accountTypeCodeMem1 = this.dataAccountType[this.dataAccountType_Index].accountTypeCode;
-                    this.accountTypeMem1 = this.dataAccountType[this.dataAccountType_Index].accountType;
+                    if (this.dataAccountType_Index >= 0) {
+                        this.accountTypeCodeMem1 = this.dataAccountType[this.dataAccountType_Index].accountTypeCode;
+                        this.accountTypeMem1 = this.dataAccountType[this.dataAccountType_Index].accountType;
+                    }
                 };
                 ChartOfAccountsComponent.prototype.dataAccountCashFlow_Index_Update = function () {
-                    this.accountCashFlowCodeMem1 = this.dataAccountCashFlow[this.dataAccountCashFlow_Index].accountCashFlowCode;
-                    this.accountCashFlowMem1 = this.dataAccountCashFlow[this.dataAccountCashFlow_Index].accountCashFlow;
+                    if (this.dataAccountCashFlow_Index >= 0) {
+                        this.accountCashFlowCodeMem1 = this.dataAccountCashFlow[this.dataAccountCashFlow_Index].accountCashFlowCode;
+                        this.accountCashFlowMem1 = this.dataAccountCashFlow[this.dataAccountCashFlow_Index].accountCashFlow;
+                    }
                 };
                 ChartOfAccountsComponent.prototype.dataAccountCategory_Index_Update = function () {
-                    this.accountCategoryCodeMem3 = this.dataAccountCategory[this.dataAccountCategory_Index].accountCategoryCode;
-                    this.accountCategoryMem3 = this.dataAccountCategory[this.dataAccountCategory_Index].accountCategory;
+                    if (this.dataAccountCategory_Index >= 0) {
+                        this.accountCategoryCodeMem3 = this.dataAccountCategory[this.dataAccountCategory_Index].accountCategoryCode;
+                        this.accountCategoryMem3 = this.dataAccountCategory[this.dataAccountCategory_Index].accountCategory;
+                    }
                 };
                 // =======
                 // ACCOUNT
@@ -139,7 +154,7 @@ System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid'
                     this.accountMem1 = this.collectionAccount.currentItem.account;
                 };
                 ChartOfAccountsComponent.prototype.delAccount = function () {
-                    this.chartOfAccountsService.deleteAccount(this.collectionAccount.currentItem, this.collectionAccount, this.toastr);
+                    this.chartOfAccountsService.deleteAccount(this.collectionAccount.currentItem, this);
                     document.getElementById("closeDelAccountModal").click();
                 };
                 ChartOfAccountsComponent.prototype.saveAccount = function () {
@@ -171,6 +186,7 @@ System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid'
                 ChartOfAccountsComponent.prototype.openAccountTypeModal = function (add) {
                     document.getElementById("openAccountTypeModal").click();
                     if (add == true) {
+                        this.accountTypeIdMem3 = 0;
                         this.accountTypeCodeMem3 = "";
                         this.accountTypeMem3 = "";
                         this.subCategoryDescriptionMem3 = "";
@@ -179,6 +195,7 @@ System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid'
                         this.dataAccountCategory_Index = 0;
                     }
                     else {
+                        this.accountTypeIdMem3 = this.collectionAccountType.currentItem.id;
                         this.accountTypeCodeMem3 = this.collectionAccountType.currentItem.accountTypeCode;
                         this.accountTypeMem3 = this.collectionAccountType.currentItem.accountType;
                         this.subCategoryDescriptionMem3 = this.collectionAccountType.currentItem.subCategoryDescription;
@@ -198,11 +215,29 @@ System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid'
                 };
                 ChartOfAccountsComponent.prototype.delAccountType = function () {
                     document.getElementById("closeDelAccountTypeModal").click();
-                    this.toastr.success('Delete Successfull', '');
+                    this.chartOfAccountsService.deleteAccountType(this.collectionAccountType.currentItem, this);
                 };
                 ChartOfAccountsComponent.prototype.saveAccountType = function () {
+                    var data = {
+                        Id: this.accountTypeIdMem3,
+                        AccountTypeCode: this.accountTypeCodeMem3,
+                        AccountType: this.accountTypeMem3,
+                        AccountCategoryId: this.dataAccountCategory[this.dataAccountCategory_Index].id,
+                        AccountCategory: this.accountCategoryMem3,
+                        SubCategoryDescription: this.subCategoryDescriptionMem3,
+                        IsLocked: true,
+                        CreatedById: 0,
+                        CreatedDateTime: new Date(),
+                        UpdatedById: 0,
+                        UpdatedDateTime: new Date()
+                    };
+                    if (this.accountTypeIdMem3 == 0) {
+                        this.chartOfAccountsService.addAccountType(data, this);
+                    }
+                    else {
+                        this.chartOfAccountsService.updateAccountType(data, this);
+                    }
                     document.getElementById("closeAccountTypeModal").click();
-                    this.toastr.success('Save Successfull', '');
                 };
                 // ================
                 // ACCOUNT CATEGORY
@@ -210,10 +245,12 @@ System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid'
                 ChartOfAccountsComponent.prototype.openAccountCategoryModal = function (add) {
                     document.getElementById("openAccountCategoryModal").click();
                     if (add == true) {
+                        this.accountCategoryIdMem2 = 0;
                         this.accountCategoryCodeMem2 = "";
                         this.accountCategoryMem2 = "";
                     }
                     else {
+                        this.accountCategoryIdMem2 = this.collectionAccountCategory.currentItem.id;
                         this.accountCategoryCodeMem2 = this.collectionAccountCategory.currentItem.accountCategoryCode;
                         this.accountCategoryMem2 = this.collectionAccountCategory.currentItem.accountCategory;
                     }
@@ -224,11 +261,26 @@ System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid'
                 };
                 ChartOfAccountsComponent.prototype.delAccountCategory = function () {
                     document.getElementById("closeDelAccountCategoryModal").click();
-                    this.toastr.success('Delete Successfull', '');
+                    this.chartOfAccountsService.deleteAccountCategory(this.collectionAccountCategory.currentItem, this);
                 };
                 ChartOfAccountsComponent.prototype.saveAccountCategory = function () {
+                    var data = {
+                        Id: this.accountCategoryIdMem2,
+                        AccountCategoryCode: this.accountCategoryMem2,
+                        AccountCategory: this.accountCategoryMem2,
+                        IsLocked: true,
+                        CreatedById: 0,
+                        CreatedDateTime: new Date(),
+                        UpdatedById: 0,
+                        UpdatedDateTime: new Date()
+                    };
+                    if (this.accountCategoryIdMem2 == 0) {
+                        this.chartOfAccountsService.addAccountCategory(data, this);
+                    }
+                    else {
+                        this.chartOfAccountsService.updateAccountCategory(data, this);
+                    }
                     document.getElementById("closeAccountCategoryModal").click();
-                    this.toastr.success('Save Successfull', '');
                 };
                 // =========
                 // CASH FLOW 
@@ -236,10 +288,12 @@ System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid'
                 ChartOfAccountsComponent.prototype.openAccountCashFlowModal = function (add) {
                     document.getElementById("openAccountCashFlowModal").click();
                     if (add == true) {
+                        this.accountCashFlowIdMem4 = 0;
                         this.accountCashFlowCodeMem4 = "";
                         this.accountCashFlowMem4 = "";
                     }
                     else {
+                        this.accountCashFlowIdMem4 = this.collectionAccountCashFlow.currentItem.id;
                         this.accountCashFlowCodeMem4 = this.collectionAccountCashFlow.currentItem.accountCashFlowCode;
                         this.accountCashFlowMem4 = this.collectionAccountCashFlow.currentItem.accountCashFlow;
                     }
@@ -250,11 +304,26 @@ System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid'
                 };
                 ChartOfAccountsComponent.prototype.delAccountCashFlow = function () {
                     document.getElementById("closeDelAccountCashFlowModal").click();
-                    this.toastr.success('Delete Successfull', '');
+                    this.chartOfAccountsService.deleteAccountCashFlow(this.collectionAccountCashFlow.currentItem, this);
                 };
                 ChartOfAccountsComponent.prototype.saveAccountCashFlow = function () {
+                    var data = {
+                        Id: this.accountCashFlowIdMem4,
+                        AccountCashFlowCode: this.accountCashFlowMem4,
+                        AccountCashFlow: this.accountCashFlowMem4,
+                        IsLocked: true,
+                        CreatedById: 0,
+                        CreatedDateTime: new Date(),
+                        UpdatedById: 0,
+                        UpdatedDateTime: new Date()
+                    };
+                    if (this.accountCashFlowIdMem4 == 0) {
+                        this.chartOfAccountsService.addAccountCashFlow(data, this);
+                    }
+                    else {
+                        this.chartOfAccountsService.updateAccountCashFlow(data, this);
+                    }
                     document.getElementById("closeAccountCashFlowModal").click();
-                    this.toastr.success('Save Successfull', '');
                 };
                 ChartOfAccountsComponent = __decorate([
                     core_1.Component({

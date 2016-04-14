@@ -88,7 +88,7 @@ export class ChartOfAccountsService {
         );            
     }    
     
-    deleteAccount(data : Object, dataCollections : Object, toastr : Object) : void {
+    deleteAccount(data : Object, component : Object) : void {
         let id = data.id;
         
         let url = "http://api.accountico.io/api/MstAccount/" + id;  
@@ -98,11 +98,11 @@ export class ChartOfAccountsService {
         this.http.delete(url,options)
             .subscribe(response => {
                 if(response.status == 200) {
-                    dataCollections.remove(data);
-                    toastr.success('Delete Successfull', '');
+                    component.collectionAccount.remove(data);
+                    component.toastr.success('Delete Successfull', '');
                 } 
                 else {
-                    toastr.error('Delete Error', '');
+                    component.toastr.error('Delete Error', '');
                 }
             })
         );             
@@ -112,7 +112,7 @@ export class ChartOfAccountsService {
     // ACCOUNT TYPE
     // ============
         
-    getAccountTypes() : wijmo.collections.ObservableArray {
+    getAccountTypes(component : Object) : wijmo.collections.ObservableArray {
         var data = new wijmo.collections.ObservableArray();
         
         let url = "http://api.accountico.io/api/MstAccountType";  
@@ -136,19 +136,80 @@ export class ChartOfAccountsService {
                     }                              
                 },
                 error => {
-                    alert(error.text());
-                    console.log(error.text());
+                    component.toastr.error('Get Error', '');
                 }                
             );
             
         return data;
+    }
+    
+    addAccountType(data : Object, component : Object) : void {
+        let url = "http://api.accountico.io/api/MstAccountType";        
+         
+        let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });        
+        headers.append('Content-Type', 'application/json'); 
+        
+        let options = new RequestOptions({ headers: headers });         
+        
+        this.http.post(url, JSON.stringify(data), options)
+            .subscribe(response => {
+                if(response.status == 200) {
+                    component.createAccountTypeCollection();
+                    component.toastr.success('Save Successfull', '');
+                } 
+                else {
+                    component.toastr.error('Save Error', '');
+                }
+            })
+        );     
+    }
+    
+    updateAccountType(data : Object, component : Object): void {
+        let url = "http://api.accountico.io/api/MstAccountType/" + data.Id;  
+        
+        let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });        
+        headers.append('Content-Type', 'application/json'); 
+        
+        let options = new RequestOptions({ headers: headers }); 
+        
+        this.http.put(url,JSON.stringify(data),options)
+            .subscribe(response => {
+                if(response.status == 200) {
+                    component.createAccountTypeCollection();
+                    component.toastr.success('Update Successfull', '');
+                } 
+                else {
+                    component.toastr.error('Update Error', '');
+                }
+            })
+        );    
+    }
+    
+    deleteAccountType(data : Object, component : Object) : void {
+        let id = data.id;
+        
+        let url = "http://api.accountico.io/api/MstAccountType/" + id;  
+        let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });        
+        let options = new RequestOptions({ headers: headers }); 
+        
+        this.http.delete(url,options)
+            .subscribe(response => {
+                if(response.status == 200) {
+                    component.collectionAccountType.remove(data);
+                    component.toastr.success('Delete Successfull', '');
+                } 
+                else {
+                    component.toastr.error('Delete Error', '');
+                }
+            })
+        );    
     }
             
     // ================
     // ACCOUNT CATEGORY
     // ================            
             
-    getAccountCategories() : wijmo.collections.ObservableArray {
+    getAccountCategories(component : Object) : wijmo.collections.ObservableArray {
         var data = new wijmo.collections.ObservableArray();
         
         let url = "http://api.accountico.io/api/MstAccountCategory";  
@@ -169,19 +230,80 @@ export class ChartOfAccountsService {
                     }                              
                 },
                 error => {
-                    alert(error.text());
-                    console.log(error.text());
+                    component.toastr.error('Get Error', '');
                 }                
             );
             
         return data;
     }
     
+    addAccountCategory(data : Object, component : Object) : void {
+        let url = "http://api.accountico.io/api/MstAccountCategory";        
+         
+        let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });        
+        headers.append('Content-Type', 'application/json'); 
+        
+        let options = new RequestOptions({ headers: headers });         
+        
+        this.http.post(url, JSON.stringify(data), options)
+            .subscribe(response => {
+                if(response.status == 200) {
+                    component.createAccountCategoryCollection();
+                    component.toastr.success('Save Successfull', '');
+                } 
+                else {
+                    component.toastr.error('Save Error', '');
+                }
+            })
+        ); 
+    }
+    
+    updateAccountCategory(data : Object, component : Object): void {
+        let url = "http://api.accountico.io/api/MstAccountCategory/" + data.Id;  
+        
+        let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });        
+        headers.append('Content-Type', 'application/json'); 
+        
+        let options = new RequestOptions({ headers: headers }); 
+        
+        this.http.put(url,JSON.stringify(data),options)
+            .subscribe(response => {
+                if(response.status == 200) {
+                    component.createAccountCategoryCollection();
+                    component.toastr.success('Update Successfull', '');
+                } 
+                else {
+                    component.toastr.error('Update Error', '');
+                }
+            })
+        );    
+    }
+    
+    deleteAccountCategory(data : Object, component : Object) : void {
+        let id = data.id;
+        
+        let url = "http://api.accountico.io/api/MstAccountCategory/" + id;  
+        let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });        
+        let options = new RequestOptions({ headers: headers }); 
+        
+        this.http.delete(url,options)
+            .subscribe(response => {
+                if(response.status == 200) {
+                    component.collectionAccountCategory.remove(data);
+                    component.toastr.success('Delete Successfull', '');
+                } 
+                else {
+                    component.toastr.error('Delete Error', '');
+                }
+            })
+        );   
+    }
+    
     // =========
     // CASH FLOW 
     // =========
         
-    getAccountCashFlow() : wijmo.collections.ObservableArray {
+    getAccountCashFlow(component : Object) : wijmo.collections.ObservableArray {
         var data = new wijmo.collections.ObservableArray();
         
         let url = "http://api.accountico.io/api/MstAccountCashFlow"; 
@@ -202,11 +324,72 @@ export class ChartOfAccountsService {
                     }                              
                 },
                 error => {
-                    alert(error.text());
-                    console.log(error.text());
+                    component.toastr.error('Get Error', '');
                 }                
             );
             
         return data;
     }    
+    
+    addAccountCashFlow(data : Object, component : Object) : void {
+        let url = "http://api.accountico.io/api/MstAccountCashFlow";        
+         
+        let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });        
+        headers.append('Content-Type', 'application/json'); 
+        
+        let options = new RequestOptions({ headers: headers });         
+        
+        this.http.post(url, JSON.stringify(data), options)
+            .subscribe(response => {
+                if(response.status == 200) {
+                    component.createAccountCashFlowCollection();
+                    component.toastr.success('Save Successfull', '');
+                } 
+                else {
+                    component.toastr.error('Save Error', '');
+                }
+            })
+        );   
+    }
+    
+    updateAccountCashFlow(data : Object, component : Object): void {
+        let url = "http://api.accountico.io/api/MstAccountCashFlow/" + data.Id;  
+        
+        let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });        
+        headers.append('Content-Type', 'application/json'); 
+        
+        let options = new RequestOptions({ headers: headers }); 
+        
+        this.http.put(url,JSON.stringify(data),options)
+            .subscribe(response => {
+                if(response.status == 200) {
+                    component.createAccountCashFlowCollection();
+                    component.toastr.success('Update Successfull', '');
+                } 
+                else {
+                    component.toastr.error('Update Error', '');
+                }
+            })
+        );  
+    }
+    
+    deleteAccountCashFlow(data : Object, component : Object) : void {
+        let id = data.id;
+        
+        let url = "http://api.accountico.io/api/MstAccountCashFlow/" + id;  
+        let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });        
+        let options = new RequestOptions({ headers: headers }); 
+        
+        this.http.delete(url,options)
+            .subscribe(response => {
+                if(response.status == 200) {
+                    component.collectionAccountCashFlow.remove(data);
+                    component.toastr.success('Delete Successfull', '');
+                } 
+                else {
+                    component.toastr.error('Delete Error', '');
+                }
+            })
+        ); 
+    }
 }
