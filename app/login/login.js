@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'angular2/router'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/http', 'angular2/router', 'ng2-toastr/ng2-toastr'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router'], function(
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, router_1;
+    var core_1, http_1, router_1, ng2_toastr_1;
     var LoginComponent;
     return {
         setters:[
@@ -22,12 +22,16 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router'], function(
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+            },
+            function (ng2_toastr_1_1) {
+                ng2_toastr_1 = ng2_toastr_1_1;
             }],
         execute: function() {
             LoginComponent = (function () {
-                function LoginComponent(_router, _http) {
+                function LoginComponent(_router, _http, _toastr) {
                     this._router = _router;
                     this._http = _http;
+                    this._toastr = _toastr;
                     this.title = 'Login';
                 }
                 LoginComponent.prototype.login = function (event, username, password) {
@@ -42,10 +46,11 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router'], function(
                         localStorage.setItem('expires_in', response.json().expires_in);
                         localStorage.setItem('token_type', response.json().token_type);
                         localStorage.setItem('userName', response.json().userName);
-                        _this._router.navigate(['Dashboard']);
+                        //this._router.navigate(['Dashboard']);
+                        window.location.replace('/dashboard');
                     }, function (error) {
-                        alert(error.text());
-                        console.log(error.text());
+                        _this._toastr.error(error.json().error_description);
+                        console.log(error.json().error_description);
                     });
                 };
                 LoginComponent = __decorate([
@@ -53,10 +58,10 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router'], function(
                         selector: 'login',
                         templateUrl: 'app/login/login.html',
                         providers: [
-                            http_1.HTTP_PROVIDERS
+                            http_1.HTTP_PROVIDERS, ng2_toastr_1.ToastsManager
                         ]
                     }), 
-                    __metadata('design:paramtypes', [router_1.Router, http_1.Http])
+                    __metadata('design:paramtypes', [router_1.Router, http_1.Http, ng2_toastr_1.ToastsManager])
                 ], LoginComponent);
                 return LoginComponent;
             }());
