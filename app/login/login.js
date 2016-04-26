@@ -46,12 +46,30 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', 'ng2-toast
                         localStorage.setItem('expires_in', response.json().expires_in);
                         localStorage.setItem('token_type', response.json().token_type);
                         localStorage.setItem('userName', response.json().userName);
-                        //this._router.navigate(['Dashboard']);
+                        _this.setSystemDefaults(response.json().userName);
+                    }, function (error) {
+                        _this._toastr.error(error.json().error_description);
+                        console.log(error.json().error_description);
+                    });
+                };
+                LoginComponent.prototype.setSystemDefaults = function (username) {
+                    var _this = this;
+                    var data = new wijmo.collections.ObservableArray();
+                    var url = "http://api.accountico.io/api/MstUser/Defaults?username=" + username;
+                    var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
+                    var options = new http_1.RequestOptions({ headers: headers });
+                    this._http.get(url, options)
+                        .subscribe(function (response) {
+                        localStorage.setItem('incomeAccountId', response.json().IncomeAccountId);
+                        localStorage.setItem('branchId', response.json().BranchId);
+                        localStorage.setItem('branch', response.json().Branch);
+                        localStorage.setItem('company', response.json().Company);
                         window.location.replace('/dashboard');
                     }, function (error) {
                         _this._toastr.error(error.json().error_description);
                         console.log(error.json().error_description);
                     });
+                    return data;
                 };
                 LoginComponent = __decorate([
                     core_1.Component({

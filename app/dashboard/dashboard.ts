@@ -20,12 +20,19 @@ export class DashboardComponent implements OnInit {
         localStorage.removeItem('expires_in');
         localStorage.removeItem('token_type');
         localStorage.removeItem('userName');
+        localStorage.removeItem('incomeAccountId');  
+        localStorage.removeItem('branchId');
+        localStorage.removeItem('branch');
+        localStorage.removeItem('company');
         
         window.location.replace('/');
-        //this._router.navigate(['Login']);
     }     
     
     chartOfAccounts() {
         this._router.navigate(['ChartOfAccounts']);
+    }
+    
+    journalVoucher() {
+        this._router.navigate(['JournalVoucher']);
     }
 }

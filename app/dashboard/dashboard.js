@@ -35,11 +35,17 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                     localStorage.removeItem('expires_in');
                     localStorage.removeItem('token_type');
                     localStorage.removeItem('userName');
+                    localStorage.removeItem('incomeAccountId');
+                    localStorage.removeItem('branchId');
+                    localStorage.removeItem('branch');
+                    localStorage.removeItem('company');
                     window.location.replace('/');
-                    //this._router.navigate(['Login']);
                 };
                 DashboardComponent.prototype.chartOfAccounts = function () {
                     this._router.navigate(['ChartOfAccounts']);
+                };
+                DashboardComponent.prototype.journalVoucher = function () {
+                    this._router.navigate(['JournalVoucher']);
                 };
                 DashboardComponent = __decorate([
                     core_1.Component({

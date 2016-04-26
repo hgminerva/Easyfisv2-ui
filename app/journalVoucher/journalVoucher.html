@@ -1,0 +1,98 @@
+<section id="journalVoucher-page" class="container">
+    
+    <h4>Journal Voucher List</h4>
+    
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <dl class="dl-horizontal">
+                    <dt>Date Start</dt>
+                    <dd>
+                        <wj-input-date #startDateMem
+                            [(value)]="startDate" 
+                            (valueChanged)="createJournalVoucher()"
+                            format="M/d/yyyy">
+                        </wj-input-date>
+                    </dd>
+                </dl>
+            </div>
+        </div>  
+        <div class="col-sm-4">
+            <div class="form-group">
+                <dl class="dl-horizontal">
+                    <dt>Date End</dt>
+                    <dd>
+                        <wj-input-date #endDateMem
+                            [(value)]="endDate"
+                            (valueChanged)="createJournalVoucher()"
+                            format="M/d/yyyy">
+                        </wj-input-date>
+                    </dd>
+                </dl>
+            </div>
+        </div>  
+    </div>    
+    
+    <div class="row">
+        <div class="col-sm-12">
+            <wj-flex-grid #flexJournalVoucher
+                        class="grid" 
+                        [itemsSource]="collectionJournalVoucher">  
+                
+                <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                        <button class="btn btn-primary sharp" (click)="openJournalVoucherDetail()">
+                                Edit
+                        </button>
+                    </template>
+                </wj-flex-grid-column>     
+                            
+                <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
+                    <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
+                        <button class="btn btn-danger sharp" (click)="openDelJournalVoucherModal()">
+                                Del
+                        </button>
+                    </template>
+                </wj-flex-grid-column>    
+                
+                <wj-flex-grid-column [header]="'JV No'" [binding]="'jvNumber'" [isReadOnly]="true" [width]="100">  
+                </wj-flex-grid-column>     
+                    
+                <wj-flex-grid-column [header]="'JV Date'" [binding]="'jvDateToString'" [isReadOnly]="true" [width]="100">  
+                </wj-flex-grid-column>     
+                
+                <wj-flex-grid-column [header]="'Particulars'" [binding]="'particulars'" [isReadOnly]="true" [width]="'*'">  
+                </wj-flex-grid-column>       
+                
+                <wj-flex-grid-column [header]="'Prepared By'" [binding]="'preparedBy'" [isReadOnly]="true" [width]="200">  
+                </wj-flex-grid-column>  
+                                                                                    
+            </wj-flex-grid>             
+         </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-sm-6 btn-group">
+            <button type="submit" class="btn btn-primary pull-left sharp" (click)="openJournalVoucherDetail(true)">Add</button>
+        </div>       
+        
+        <div class="col-sm-6 btn-group">
+            <button type="button" class="btn btn-default pull-right sharp" (click)="collectionJournalVoucher.moveToFirstPage()">
+                <span class="glyphicon glyphicon-fast-backward"></span>
+            </button>
+            <button type="button" class="btn btn-default pull-right sharp" (click)="collectionJournalVoucher.moveToPreviousPage()">
+                <span class="glyphicon glyphicon-step-backward"></span>
+            </button>
+            <button type="button" class="btn btn-default pull-right sharp" disabled  style="width:100px">
+                {{collectionJournalVoucher.pageIndex + 1}} / {{collectionJournalVoucher.pageCount}}
+            </button>
+            <button type="button" class="btn btn-default pull-right sharp" (click)="collectionJournalVoucher.moveToNextPage()">
+                <span class="glyphicon glyphicon-step-forward"></span>
+            </button>
+            <button type="button" class="btn btn-default pull-right sharp" (click)="collectionJournalVoucher.moveToLastPage()">
+                <span class="glyphicon glyphicon-fast-forward"></span>
+            </button>
+        </div> 
+    </div>  
+    
+</section>

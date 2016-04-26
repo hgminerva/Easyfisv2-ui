@@ -31,8 +31,8 @@ export class LoginComponent {
                 localStorage.setItem('expires_in', response.json().expires_in);
                 localStorage.setItem('token_type', response.json().token_type);
                 localStorage.setItem('userName', response.json().userName);
-                //this._router.navigate(['Dashboard']);
-                window.location.replace('/dashboard');
+                
+                this.setSystemDefaults(response.json().userName);
             },
             error => {
                 this._toastr.error(error.json().error_description);
@@ -40,4 +40,31 @@ export class LoginComponent {
             }
         );
     }    
+    
+    setSystemDefaults(username) {
+        var data = new wijmo.collections.ObservableArray();
+        
+        let url = "http://api.accountico.io/api/MstUser/Defaults?username=" + username
+        let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });        
+        let options = new RequestOptions({ headers: headers }); 
+        
+        this._http.get(url, options)
+            .subscribe(
+                response => {
+                    localStorage.setItem('incomeAccountId', response.json().IncomeAccountId);
+                    localStorage.setItem('branchId', response.json().BranchId);   
+                    localStorage.setItem('branch', response.json().Branch);
+                    localStorage.setItem('company', response.json().Company);   
+                    
+                    window.location.replace('/dashboard');                     
+                },
+                error => {
+                    this._toastr.error(error.json().error_description);
+                    console.log(error.json().error_description);
+                }                
+            );
+            
+        return data;
+    }
+    
 }

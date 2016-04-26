@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', 'angular2/common', '../home/home', '../login/login', '../logout/logout', '../dashboard/dashboard', '../chartOfAccounts/chartOfAccounts', '../profile/profile'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/common', '../home/home', '../login/login', '../logout/logout', '../dashboard/dashboard', '../chartOfAccounts/chartOfAccounts', '../profile/profile', '../journalVoucher/journalVoucher'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2/common', '../home
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, common_1, home_1, login_1, logout_1, dashboard_1, chartOfAccounts_1, profile_1;
+    var core_1, router_1, http_1, common_1, home_1, login_1, logout_1, dashboard_1, chartOfAccounts_1, profile_1, journalVoucher_1;
     var App;
     return {
         setters:[
@@ -19,6 +19,9 @@ System.register(['angular2/core', 'angular2/router', 'angular2/common', '../home
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+            },
+            function (http_1_1) {
+                http_1 = http_1_1;
             },
             function (common_1_1) {
                 common_1 = common_1_1;
@@ -40,16 +43,21 @@ System.register(['angular2/core', 'angular2/router', 'angular2/common', '../home
             },
             function (profile_1_1) {
                 profile_1 = profile_1_1;
+            },
+            function (journalVoucher_1_1) {
+                journalVoucher_1 = journalVoucher_1_1;
             }],
         execute: function() {
             App = (function () {
-                function App() {
+                function App(_http) {
                     if (!localStorage.getItem('access_token')) {
-                        this.profile = "APP";
+                        this.profile = " ";
                         this.login = false;
                     }
                     else {
-                        this.profile = localStorage.getItem('userName').toUpperCase();
+                        this.profile = localStorage.getItem('company').toUpperCase() + " - " +
+                            localStorage.getItem('branch').toUpperCase() + " - " +
+                            localStorage.getItem('userName').toUpperCase();
                         this.login = true;
                     }
                 }
@@ -62,7 +70,8 @@ System.register(['angular2/core', 'angular2/router', 'angular2/common', '../home
                             common_1.NgIf
                         ],
                         providers: [
-                            router_1.ROUTER_PROVIDERS
+                            router_1.ROUTER_PROVIDERS,
+                            http_1.HTTP_PROVIDERS
                         ]
                     }),
                     router_1.RouteConfig([{ path: '/home', name: 'Home', component: home_1.HomeComponent, useAsDefault: true },
@@ -70,9 +79,10 @@ System.register(['angular2/core', 'angular2/router', 'angular2/common', '../home
                         { path: '/logout', name: 'Logout', component: logout_1.LogoutComponent },
                         { path: '/dashboard', name: 'Dashboard', component: dashboard_1.DashboardComponent },
                         { path: '/chartOfAccounts', name: 'ChartOfAccounts', component: chartOfAccounts_1.ChartOfAccountsComponent },
-                        { path: '/profile', name: 'Profile', component: profile_1.ProfileComponent }
+                        { path: '/profile', name: 'Profile', component: profile_1.ProfileComponent },
+                        { path: '/journalVoucher', name: 'JournalVoucher', component: journalVoucher_1.JournalVoucherComponent }
                     ]), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [http_1.Http])
                 ], App);
                 return App;
             }());

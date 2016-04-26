@@ -26,6 +26,10 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     localStorage.removeItem('expires_in');
                     localStorage.removeItem('token_type');
                     localStorage.removeItem('userName');
+                    localStorage.removeItem('incomeAccountId');
+                    localStorage.removeItem('branchId');
+                    localStorage.removeItem('branch');
+                    localStorage.removeItem('company');
                     window.location.replace('/');
                 };
                 LogoutComponent = __decorate([

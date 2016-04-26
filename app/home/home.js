@@ -24,6 +24,10 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     this.expires_in = localStorage.getItem('expires_in');
                     this.token_type = localStorage.getItem('token_type');
                     this.userName = localStorage.getItem('userName');
+                    this.incomeAccountId = localStorage.getItem('incomeAccountId');
+                    this.branchId = localStorage.getItem('branchId');
+                    this.branch = localStorage.getItem('branch');
+                    this.company = localStorage.getItem('company');
                 }
                 HomeComponent = __decorate([
                     core_1.Component({
