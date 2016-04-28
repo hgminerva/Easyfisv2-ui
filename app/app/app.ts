@@ -9,7 +9,8 @@ import { LogoutComponent } from '../logout/logout';
 import { DashboardComponent } from '../dashboard/dashboard';
 import { ChartOfAccountsComponent } from '../chartOfAccounts/chartOfAccounts';
 import { ProfileComponent } from '../profile/profile';
-import { JournalVoucherComponent } from '../journalVoucher/journalVoucher';
+import { JVComponent } from '../jv/jv';
+import { JVDetailComponent } from '../jvDetail/jvDetail';
 
 @Component({
   selector: 'app',
@@ -29,7 +30,8 @@ import { JournalVoucherComponent } from '../journalVoucher/journalVoucher';
               { path: '/dashboard', name: 'Dashboard', component: DashboardComponent },
               { path: '/chartOfAccounts', name: 'ChartOfAccounts', component: ChartOfAccountsComponent },  
               { path: '/profile', name: 'Profile', component: ProfileComponent },
-              { path: '/journalVoucher', name: 'JournalVoucher', component: JournalVoucherComponent } 
+              { path: '/jv', name: 'JV', component: JVComponent },
+              { path: '/jvDetail/:id', name: 'JVDetail', component: JVDetailComponent} 
 ])
 export class App {
     public profile : string;

@@ -11,7 +11,7 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, http_1;
-    var JournalVoucherService;
+    var JVService;
     return {
         setters:[
             function (core_1_1) {
@@ -21,17 +21,17 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                 http_1 = http_1_1;
             }],
         execute: function() {
-            JournalVoucherService = (function () {
-                function JournalVoucherService(_http) {
+            JVService = (function () {
+                function JVService(_http) {
                     this.http = _http;
                 }
-                JournalVoucherService.prototype.convertDateToString = function (date) {
+                JVService.prototype.convertDateToString = function (date) {
                     var yyyy = date.getFullYear().toString();
                     var mm = (date.getMonth() + 1).toString();
                     var dd = date.getDate().toString();
                     return yyyy + '-' + (mm[1] ? mm : "0" + mm[0]) + '-' + (dd[1] ? dd : "0" + dd[0]);
                 };
-                JournalVoucherService.prototype.getJournalVoucherList = function (component) {
+                JVService.prototype.getJVList = function (component) {
                     var _this = this;
                     var branchId = localStorage.getItem('branchId');
                     var data = new wijmo.collections.ObservableArray();
@@ -68,18 +68,18 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
                             }
                         }
                     }, function (error) {
-                        component.toastr.error('Get Error', '');
+                        component._toastr.error('Get Error', '');
                     });
                     return data;
                 };
-                JournalVoucherService = __decorate([
+                JVService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])
-                ], JournalVoucherService);
-                return JournalVoucherService;
+                ], JVService);
+                return JVService;
             }());
-            exports_1("JournalVoucherService", JournalVoucherService);
+            exports_1("JVService", JVService);
         }
     }
 });
-//# sourceMappingURL=journalVoucherService.js.map
+//# sourceMappingURL=jvService.js.map

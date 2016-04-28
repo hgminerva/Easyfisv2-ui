@@ -45,7 +45,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                     this._router.navigate(['ChartOfAccounts']);
                 };
                 DashboardComponent.prototype.journalVoucher = function () {
-                    this._router.navigate(['JournalVoucher']);
+                    this._router.navigate(['JV']);
                 };
                 DashboardComponent = __decorate([
                     core_1.Component({

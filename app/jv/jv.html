@@ -1,4 +1,4 @@
-<section id="journalVoucher-page" class="container">
+<section id="jv-page" class="container">
     
     <h4>Journal Voucher List</h4>
     
@@ -10,7 +10,7 @@
                     <dd>
                         <wj-input-date #startDateMem
                             [(value)]="startDate" 
-                            (valueChanged)="createJournalVoucher()"
+                            (valueChanged)="createJV()"
                             format="M/d/yyyy">
                         </wj-input-date>
                     </dd>
@@ -24,7 +24,7 @@
                     <dd>
                         <wj-input-date #endDateMem
                             [(value)]="endDate"
-                            (valueChanged)="createJournalVoucher()"
+                            (valueChanged)="createJV()"
                             format="M/d/yyyy">
                         </wj-input-date>
                     </dd>
@@ -35,13 +35,13 @@
     
     <div class="row">
         <div class="col-sm-12">
-            <wj-flex-grid #flexJournalVoucher
+            <wj-flex-grid #flexJV
                         class="grid" 
-                        [itemsSource]="collectionJournalVoucher">  
+                        [itemsSource]="collectionJV">  
                 
                 <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
                     <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                        <button class="btn btn-primary sharp" (click)="openJournalVoucherDetail()">
+                        <button class="btn btn-primary sharp" (click)="openJVDetail(false)">
                                 Edit
                         </button>
                     </template>
@@ -49,7 +49,7 @@
                             
                 <wj-flex-grid-column [header]="" [isReadOnly]="true" [width]="60">
                     <template wjFlexGridCellTemplate [cellType]="'Cell'" #cell="cell">
-                        <button class="btn btn-danger sharp" (click)="openDelJournalVoucherModal()">
+                        <button class="btn btn-danger sharp" (click)="openDelJVModal()">
                                 Del
                         </button>
                     </template>
@@ -66,30 +66,32 @@
                 
                 <wj-flex-grid-column [header]="'Prepared By'" [binding]="'preparedBy'" [isReadOnly]="true" [width]="200">  
                 </wj-flex-grid-column>  
-                                                                                    
+                
+                <wj-flex-grid-column [header]="'L'" [binding]="'isLocked'" [isReadOnly]="true" [width]="50">  
+                </wj-flex-grid-column>                                                                  
             </wj-flex-grid>             
          </div>
     </div>
     
     <div class="row">
         <div class="col-sm-6 btn-group">
-            <button type="submit" class="btn btn-primary pull-left sharp" (click)="openJournalVoucherDetail(true)">Add</button>
+            <button type="submit" class="btn btn-primary pull-left sharp" (click)="openJVDetail(true)">Add</button>
         </div>       
         
         <div class="col-sm-6 btn-group">
-            <button type="button" class="btn btn-default pull-right sharp" (click)="collectionJournalVoucher.moveToFirstPage()">
+            <button type="button" class="btn btn-default pull-right sharp" (click)="collectionJV.moveToFirstPage()">
                 <span class="glyphicon glyphicon-fast-backward"></span>
             </button>
-            <button type="button" class="btn btn-default pull-right sharp" (click)="collectionJournalVoucher.moveToPreviousPage()">
+            <button type="button" class="btn btn-default pull-right sharp" (click)="collectionJV.moveToPreviousPage()">
                 <span class="glyphicon glyphicon-step-backward"></span>
             </button>
             <button type="button" class="btn btn-default pull-right sharp" disabled  style="width:100px">
-                {{collectionJournalVoucher.pageIndex + 1}} / {{collectionJournalVoucher.pageCount}}
+                {{collectionJV.pageIndex + 1}} / {{collectionJV.pageCount}}
             </button>
-            <button type="button" class="btn btn-default pull-right sharp" (click)="collectionJournalVoucher.moveToNextPage()">
+            <button type="button" class="btn btn-default pull-right sharp" (click)="collectionJV.moveToNextPage()">
                 <span class="glyphicon glyphicon-step-forward"></span>
             </button>
-            <button type="button" class="btn btn-default pull-right sharp" (click)="collectionJournalVoucher.moveToLastPage()">
+            <button type="button" class="btn btn-default pull-right sharp" (click)="collectionJV.moveToLastPage()">
                 <span class="glyphicon glyphicon-fast-forward"></span>
             </button>
         </div> 

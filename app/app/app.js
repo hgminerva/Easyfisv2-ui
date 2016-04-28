@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/common', '../home/home', '../login/login', '../logout/logout', '../dashboard/dashboard', '../chartOfAccounts/chartOfAccounts', '../profile/profile', '../journalVoucher/journalVoucher'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/common', '../home/home', '../login/login', '../logout/logout', '../dashboard/dashboard', '../chartOfAccounts/chartOfAccounts', '../profile/profile', '../jv/jv', '../jvDetail/jvDetail'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, http_1, common_1, home_1, login_1, logout_1, dashboard_1, chartOfAccounts_1, profile_1, journalVoucher_1;
+    var core_1, router_1, http_1, common_1, home_1, login_1, logout_1, dashboard_1, chartOfAccounts_1, profile_1, jv_1, jvDetail_1;
     var App;
     return {
         setters:[
@@ -44,8 +44,11 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
             function (profile_1_1) {
                 profile_1 = profile_1_1;
             },
-            function (journalVoucher_1_1) {
-                journalVoucher_1 = journalVoucher_1_1;
+            function (jv_1_1) {
+                jv_1 = jv_1_1;
+            },
+            function (jvDetail_1_1) {
+                jvDetail_1 = jvDetail_1_1;
             }],
         execute: function() {
             App = (function () {
@@ -80,7 +83,8 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
                         { path: '/dashboard', name: 'Dashboard', component: dashboard_1.DashboardComponent },
                         { path: '/chartOfAccounts', name: 'ChartOfAccounts', component: chartOfAccounts_1.ChartOfAccountsComponent },
                         { path: '/profile', name: 'Profile', component: profile_1.ProfileComponent },
-                        { path: '/journalVoucher', name: 'JournalVoucher', component: journalVoucher_1.JournalVoucherComponent }
+                        { path: '/jv', name: 'JV', component: jv_1.JVComponent },
+                        { path: '/jvDetail/:id', name: 'JVDetail', component: jvDetail_1.JVDetailComponent }
                     ]), 
                     __metadata('design:paramtypes', [http_1.Http])
                 ], App);

@@ -33,6 +33,6 @@ export class DashboardComponent implements OnInit {
     }
     
     journalVoucher() {
-        this._router.navigate(['JournalVoucher']);
+        this._router.navigate(['JV']);
     }
 }

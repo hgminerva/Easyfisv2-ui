@@ -3,44 +3,33 @@
 import {Component,Injectable} from 'angular2/core';
 import {Http, Headers, RequestOptions} from 'angular2/http';
 
+import {JVDetailComponent} from '../jvDetail/jvDetail';
+
 @Injectable()
-export class JournalVoucherService {
+export class JVDetailService {
     private http : Http;
     
     constructor (_http: Http) {
         this.http = _http;
-    }  
-
-    convertDateToString(date : Date) : string {
-        let yyyy : string = date.getFullYear().toString();                                    
-        let mm : string = (date.getMonth()+1).toString();        
-        let dd  : string = date.getDate().toString();             
-                            
-        return yyyy + '-' + (mm[1] ? mm : "0"+mm[0]) + '-' + (dd[1] ? dd : "0"+dd[0]);    
-    }
-
+    } 
     
-    getJournalVoucherList(component : Object) : wijmo.collections.ObservableArray {
-        let branchId : number = localStorage.getItem('branchId');
-        let data : wijmo.collections.ObservableArray = new wijmo.collections.ObservableArray();
-        let url : string = "http://api.accountico.io/api/TrnJournalVoucher/List?startDate=" + this.convertDateToString(component.startDate) + "&" +
-                                                                               "endDate=" + this.convertDateToString(component.endDate) + "&" +
-                                                                               "branchId=" + branchId;        
+    getJV(component : JVDetailComponent) : Object {
+        let data : Object;
+        let url : string = "http://api.accountico.io/api/TrnJournalVoucher/" + component.id;
         let headers : Headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });        
-        let options : RequestOptions = new RequestOptions({ headers: headers }); 
+        let options : RequestOptions = new RequestOptions({ headers: headers });       
         
         this.http.get(url, options)
             .subscribe(
                 response => {
                     for (var key in response.json()) {
                         if (response.json().hasOwnProperty(key)) {
-                            data.push({
+                            data = {
                                 id: response.json()[key].Id,
                                 branchId: response.json()[key].BranchId,
                                 branch: response.json()[key].Branch,
                                 jvNumber: response.json()[key].JVNumber,
                                 jvDate: response.json()[key].JVDate,
-                                jvDateToString: this.convertDateToString(new Date(response.json()[key].JVDate)),
                                 particulars: response.json()[key].Particulars,
                                 manualJVNumber: response.json()[key].ManualJVNumber,
                                 preparedById: response.json()[key].PreparedById,
@@ -53,16 +42,17 @@ export class JournalVoucherService {
                                 createdById: response.json()[key].CreatedById,
                                 createdDateTime: response.json()[key].CreatedDateTime,
                                 updatedById: response.json()[key].UpdatedById,
-                                updatedDateTime: response.json()[key].UpdatedDateTime  
-                            });                            
+                                updatedDateTime: response.json()[key].UpdatedDateTime
+                            };                            
                         }
-                    }                              
+                    }                          
                 },
                 error => {
-                    component.toastr.error('Get Error', '');
+                    component._toastr.error('Get Error', '');
                 }                
             );
             
         return data;
-    }    
+        
+    }
 }

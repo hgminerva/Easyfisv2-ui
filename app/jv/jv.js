@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input', 'ng2-toastr/ng2-toastr', '../journalVoucher/journalVoucherService'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid', 'wijmo/wijmo.angular2.input', 'ng2-toastr/ng2-toastr', '../jv/jvService'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -13,8 +13,8 @@ System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid'
     var __param = (this && this.__param) || function (paramIndex, decorator) {
         return function (target, key) { decorator(target, key, paramIndex); }
     };
-    var core_1, router_1, wjNg2FlexGrid, wjNg2Input, ng2_toastr_1, journalVoucherService_1;
-    var JournalVoucherComponent;
+    var core_1, router_1, wjNg2FlexGrid, wjNg2Input, ng2_toastr_1, jvService_1;
+    var JVComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -32,49 +32,59 @@ System.register(['angular2/core', 'angular2/router', 'wijmo/wijmo.angular2.grid'
             function (ng2_toastr_1_1) {
                 ng2_toastr_1 = ng2_toastr_1_1;
             },
-            function (journalVoucherService_1_1) {
-                journalVoucherService_1 = journalVoucherService_1_1;
+            function (jvService_1_1) {
+                jvService_1 = jvService_1_1;
             }],
         execute: function() {
-            JournalVoucherComponent = (function () {
-                function JournalVoucherComponent(_router, _toastr, _journalVoucherService) {
+            JVComponent = (function () {
+                function JVComponent(_router, _toastr, _jvService) {
                     this._router = _router;
                     this._toastr = _toastr;
-                    this._journalVoucherService = _journalVoucherService;
+                    this._jvService = _jvService;
                 }
-                JournalVoucherComponent.prototype.ngOnInit = function () {
+                JVComponent.prototype.ngOnInit = function () {
                     if (!localStorage.getItem('access_token')) {
                         this._router.navigate(['Login']);
                     }
                     else {
                         this.startDate = new Date();
                         this.endDate = new Date();
-                        this.createJournalVoucher();
+                        this.createJV();
                     }
                 };
-                JournalVoucherComponent.prototype.createJournalVoucher = function () {
-                    this.dataJournalVoucher = this._journalVoucherService.getJournalVoucherList(this);
-                    this.collectionJournalVoucher = new wijmo.collections.CollectionView(this.dataJournalVoucher);
-                    this.collectionJournalVoucher.pageSize = 10;
-                    this.collectionJournalVoucher.trackChanges = true;
+                JVComponent.prototype.createJV = function () {
+                    this.dataJV = this._jvService.getJVList(this);
+                    this.collectionJV = new wijmo.collections.CollectionView(this.dataJV);
+                    this.collectionJV.pageSize = 10;
+                    this.collectionJV.trackChanges = true;
                 };
-                JournalVoucherComponent = __decorate([
+                JVComponent.prototype.openJVDetail = function (add) {
+                    if (add == true) {
+                        this._router.navigate(['JVDetail', { id: 0 }]);
+                    }
+                    else {
+                        this._router.navigate(['JVDetail', { id: this.collectionJV.currentItem.id }]);
+                    }
+                };
+                JVComponent.prototype.openDelJVModal = function () {
+                };
+                JVComponent = __decorate([
                     core_1.Component({
-                        selector: 'journalVoucher',
-                        templateUrl: 'app/journalVoucher/journalVoucher.html',
+                        selector: 'jv',
+                        templateUrl: 'app/jv/jv.html',
                         directives: [wjNg2FlexGrid.WjFlexGrid,
                             wjNg2FlexGrid.WjFlexGridColumn,
                             wjNg2FlexGrid.WjFlexGridCellTemplate,
                             wjNg2Input.WjInputDate],
-                        providers: [ng2_toastr_1.ToastsManager, journalVoucherService_1.JournalVoucherService]
+                        providers: [ng2_toastr_1.ToastsManager, jvService_1.JVService]
                     }),
-                    __param(2, core_1.Inject(journalVoucherService_1.JournalVoucherService)), 
-                    __metadata('design:paramtypes', [router_1.Router, ng2_toastr_1.ToastsManager, journalVoucherService_1.JournalVoucherService])
-                ], JournalVoucherComponent);
-                return JournalVoucherComponent;
+                    __param(2, core_1.Inject(jvService_1.JVService)), 
+                    __metadata('design:paramtypes', [router_1.Router, ng2_toastr_1.ToastsManager, jvService_1.JVService])
+                ], JVComponent);
+                return JVComponent;
             }());
-            exports_1("JournalVoucherComponent", JournalVoucherComponent);
+            exports_1("JVComponent", JVComponent);
         }
     }
 });
-//# sourceMappingURL=journalVoucher.js.map
+//# sourceMappingURL=jv.js.map
